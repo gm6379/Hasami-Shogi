@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A95B10F71BB9C7CF00AB03A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B10F61BB9C7CF00AB03A0 /* AppDelegate.swift */; };
-		A95B10F91BB9C7CF00AB03A0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B10F81BB9C7CF00AB03A0 /* ViewController.swift */; };
+		A95B10F91BB9C7CF00AB03A0 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B10F81BB9C7CF00AB03A0 /* BoardViewController.swift */; };
 		A95B10FC1BB9C7CF00AB03A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A95B10FA1BB9C7CF00AB03A0 /* Main.storyboard */; };
 		A95B10FF1BB9C7CF00AB03A0 /* Hasami_Shogi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A95B10FD1BB9C7CF00AB03A0 /* Hasami_Shogi.xcdatamodeld */; };
 		A95B11011BB9C7CF00AB03A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A95B11001BB9C7CF00AB03A0 /* Assets.xcassets */; };
@@ -37,7 +37,7 @@
 /* Begin PBXFileReference section */
 		A95B10F31BB9C7CF00AB03A0 /* Hasami Shogi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hasami Shogi.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A95B10F61BB9C7CF00AB03A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A95B10F81BB9C7CF00AB03A0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A95B10F81BB9C7CF00AB03A0 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BoardViewController.swift; path = ../BoardViewController.swift; sourceTree = "<group>"; };
 		A95B10FB1BB9C7CF00AB03A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A95B10FE1BB9C7CF00AB03A0 /* Hasami_Shogi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Hasami_Shogi.xcdatamodel; sourceTree = "<group>"; };
 		A95B11001BB9C7CF00AB03A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,8 +99,11 @@
 		A95B10F51BB9C7CF00AB03A0 /* Hasami Shogi */ = {
 			isa = PBXGroup;
 			children = (
+				A95B112A1BB9C8C500AB03A0 /* Utilities */,
+				A95B11291BB9C8AF00AB03A0 /* Model */,
+				A95B11281BB9C8A700AB03A0 /* Views */,
+				A95B11271BB9C89D00AB03A0 /* Controllers */,
 				A95B10F61BB9C7CF00AB03A0 /* AppDelegate.swift */,
-				A95B10F81BB9C7CF00AB03A0 /* ViewController.swift */,
 				A95B10FA1BB9C7CF00AB03A0 /* Main.storyboard */,
 				A95B11001BB9C7CF00AB03A0 /* Assets.xcassets */,
 				A95B11021BB9C7CF00AB03A0 /* LaunchScreen.storyboard */,
@@ -126,6 +129,35 @@
 				A95B111B1BB9C7CF00AB03A0 /* Info.plist */,
 			);
 			path = "Hasami ShogiUITests";
+			sourceTree = "<group>";
+		};
+		A95B11271BB9C89D00AB03A0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A95B10F81BB9C7CF00AB03A0 /* BoardViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		A95B11281BB9C8A700AB03A0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A95B11291BB9C8AF00AB03A0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A95B112A1BB9C8C500AB03A0 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,7 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A95B10F91BB9C7CF00AB03A0 /* ViewController.swift in Sources */,
+				A95B10F91BB9C7CF00AB03A0 /* BoardViewController.swift in Sources */,
 				A95B10F71BB9C7CF00AB03A0 /* AppDelegate.swift in Sources */,
 				A95B10FF1BB9C7CF00AB03A0 /* Hasami_Shogi.xcdatamodeld in Sources */,
 			);
@@ -404,6 +436,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.georgemcdonnell.Hasami-Shogi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -415,6 +448,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.georgemcdonnell.Hasami-Shogi";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
