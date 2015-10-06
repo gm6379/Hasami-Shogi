@@ -15,6 +15,9 @@
 		A95B11041BB9C7CF00AB03A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A95B11021BB9C7CF00AB03A0 /* LaunchScreen.storyboard */; };
 		A95B110F1BB9C7CF00AB03A0 /* Hasami_ShogiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B110E1BB9C7CF00AB03A0 /* Hasami_ShogiTests.swift */; };
 		A95B111A1BB9C7CF00AB03A0 /* Hasami_ShogiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B11191BB9C7CF00AB03A0 /* Hasami_ShogiUITests.swift */; };
+		A9B766991BC3EABD00E74CAC /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B766981BC3EABD00E74CAC /* Board.swift */; settings = {ASSET_TAGS = (); }; };
+		A9B7669B1BC3FFAF00E74CAC /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B7669A1BC3FFAF00E74CAC /* Game.swift */; settings = {ASSET_TAGS = (); }; };
+		A9B7669F1BC40CB100E74CAC /* BoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B7669E1BC40CB100E74CAC /* BoardCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +40,7 @@
 /* Begin PBXFileReference section */
 		A95B10F31BB9C7CF00AB03A0 /* Hasami Shogi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hasami Shogi.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A95B10F61BB9C7CF00AB03A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A95B10F81BB9C7CF00AB03A0 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BoardViewController.swift; path = ../BoardViewController.swift; sourceTree = "<group>"; };
+		A95B10F81BB9C7CF00AB03A0 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
 		A95B10FB1BB9C7CF00AB03A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A95B10FE1BB9C7CF00AB03A0 /* Hasami_Shogi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Hasami_Shogi.xcdatamodel; sourceTree = "<group>"; };
 		A95B11001BB9C7CF00AB03A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +52,9 @@
 		A95B11151BB9C7CF00AB03A0 /* Hasami ShogiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hasami ShogiUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A95B11191BB9C7CF00AB03A0 /* Hasami_ShogiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hasami_ShogiUITests.swift; sourceTree = "<group>"; };
 		A95B111B1BB9C7CF00AB03A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A9B766981BC3EABD00E74CAC /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Board.swift; path = "Hasami Shogi/Controllers/Board.swift"; sourceTree = SOURCE_ROOT; };
+		A9B7669A1BC3FFAF00E74CAC /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Game.swift; path = "Hasami Shogi/Controllers/Game.swift"; sourceTree = SOURCE_ROOT; };
+		A9B7669E1BC40CB100E74CAC /* BoardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BoardCollectionViewCell.swift; path = "Hasami Shogi/Controllers/BoardCollectionViewCell.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +148,7 @@
 		A95B11281BB9C8A700AB03A0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A9B7669E1BC40CB100E74CAC /* BoardCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -156,6 +163,8 @@
 		A95B112A1BB9C8C500AB03A0 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				A9B766981BC3EABD00E74CAC /* Board.swift */,
+				A9B7669A1BC3FFAF00E74CAC /* Game.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -291,8 +300,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A95B10F91BB9C7CF00AB03A0 /* BoardViewController.swift in Sources */,
+				A9B7669B1BC3FFAF00E74CAC /* Game.swift in Sources */,
 				A95B10F71BB9C7CF00AB03A0 /* AppDelegate.swift in Sources */,
+				A9B766991BC3EABD00E74CAC /* Board.swift in Sources */,
 				A95B10FF1BB9C7CF00AB03A0 /* Hasami_Shogi.xcdatamodeld in Sources */,
+				A9B7669F1BC40CB100E74CAC /* BoardCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +531,7 @@
 				A95B11201BB9C7CF00AB03A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A95B11211BB9C7CF00AB03A0 /* Build configuration list for PBXNativeTarget "Hasami ShogiTests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +540,7 @@
 				A95B11231BB9C7CF00AB03A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A95B11241BB9C7CF00AB03A0 /* Build configuration list for PBXNativeTarget "Hasami ShogiUITests" */ = {
 			isa = XCConfigurationList;
@@ -535,6 +549,7 @@
 				A95B11261BB9C7CF00AB03A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
