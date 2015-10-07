@@ -14,6 +14,10 @@ public class Board: UICollectionView {
     private static let NUMBER_OF_CELLS = 81
     private var numberOfWhiteCells: Int?
     private var numberOfBlackCells: Int?
+    
+    private enum MoveDirection {
+        case Up, Down, Left, Right
+    }
 
     public func getNumberOfWhiteCells() -> Int {
         return numberOfWhiteCells!
@@ -49,40 +53,92 @@ public class Board: UICollectionView {
         cell.pieceView = piece
     }
     
-    static func removePieceFromCell(cell: BoardCollectionViewCell) {
+    private func removePieceFromCell(cell: BoardCollectionViewCell) {
         cell.pieceView?.removeFromSuperview()
         cell.state = BoardCollectionViewCell.BOARD_CELL_STATE_EMPTY
         cell.backgroundColor = Board.COLOR
     }
-    
-    // returns true if the move is legal
-    // returns false if the move is illegal
-    public static func movePieceFromCell(originCell: BoardCollectionViewCell, toDestinationCell destinationCell: BoardCollectionViewCell) -> Bool {
-        
+
+    public func movePieceFromCell(originCell: BoardCollectionViewCell, atIndexPath originIndexPath: NSIndexPath, toDestinationCell destinationCell: BoardCollectionViewCell, atIndexPath destinationIndexPath: NSIndexPath) -> Bool {
         Board.drawPieceInCell(destinationCell, withState: originCell.state)
-        self.removePieceFromCell(originCell)
+        removePieceFromCell(originCell)
         
         return true
     }
     
-    // works out if a move is legal
+    // returns true if the move is legal
+    // returns false if the move is illegal
     public func isMoveLegalFromOriginIndexPath(origin: NSIndexPath, toDestinationIndexPath destination: NSIndexPath) -> Bool {
         // check for a diagonal move
-        if (origin.section != destination.section &&
-            origin.item != destination.item) {
+        if (origin.section != destination.section && origin.item != destination.item) {
             return false
         } else { // check for a collision
-            // obtain reference to cells on the route to the destination are occupied
-            let indexPaths: [NSIndexPath]
-            
             if (origin.section == destination.section) { // a horizontal move
-                
+                // if  move to the right
+                if (destination.item > origin.item) {
+                    return !checkCollisionInDirection(.Right, fromOriginIndexPath: origin, toDestinationIndexPath: destination)
+                } else { // move is to the left
+                    return !checkCollisionInDirection(.Left, fromOriginIndexPath: origin, toDestinationIndexPath: destination)
+                }
             } else { // a vertical move
-                
+                // if move up
+                if (destination.section < origin.section) {
+                    return !checkCollisionInDirection(.Up, fromOriginIndexPath: origin, toDestinationIndexPath: destination)
+                } else { // move is down
+                    return !checkCollisionInDirection(.Down, fromOriginIndexPath: origin, toDestinationIndexPath: destination)
+                }
+            }
+        }
+    }
+    
+    // returns true if a collsion occurs
+    // returns false if no collision occurs
+    private func checkCollisionInDirection(direction: MoveDirection, fromOriginIndexPath origin: NSIndexPath, toDestinationIndexPath destination: NSIndexPath) -> Bool{
+        var state: BoardCollectionViewCell.BoardCellState?
+
+        switch direction {
+        case .Up:
+            var section = origin.section - 1
+            while (!stateIsOccupied(state) && section > destination.section) {
+                let cell = cellForItemAtIndexPath(NSIndexPath(forItem: origin.item, inSection: section)) as! BoardCollectionViewCell
+                state = cell.state
+                section--
+            }
+        case .Down:
+            var section = origin.section + 1
+            while (!stateIsOccupied(state) && section < destination.section ) {
+                let cell = cellForItemAtIndexPath(NSIndexPath(forItem: origin.item, inSection: section)) as! BoardCollectionViewCell
+                state = cell.state
+                section++
+            }
+        case .Right:
+            var item = origin.item + 1
+            while (!stateIsOccupied(state) && item < destination.item) {
+                let cell = cellForItemAtIndexPath(NSIndexPath(forItem: item, inSection: origin.section)) as! BoardCollectionViewCell
+                state = cell.state
+                item++
+            }
+        case .Left:
+            var item = origin.item - 1
+            while (!stateIsOccupied(state) && item > destination.item) {
+                let cell = cellForItemAtIndexPath(NSIndexPath(forItem: item, inSection: origin.section)) as! BoardCollectionViewCell
+                state = cell.state
+                item--
             }
         }
         
-        return true
+        // if an occupied cell is found, move is illegal
+        return stateIsOccupied(state)
+    }
+    
+    // returns whether a cell state is occupied
+    private func stateIsOccupied(state: BoardCollectionViewCell.BoardCellState?) -> Bool {
+        if (state == BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE
+         || state == BoardCollectionViewCell.BOARD_CELL_STATE_BLACK_PIECE) {
+            return true
+        } else {
+            return false
+        }
     }
 
     required public init?(coder aDecoder: NSCoder) {

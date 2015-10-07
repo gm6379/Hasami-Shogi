@@ -77,12 +77,20 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
             // if origin cell is not empty and destination cell is empty
             if (originCell.state != BoardCollectionViewCell.BOARD_CELL_STATE_EMPTY && destinationCell.state == BoardCollectionViewCell.BOARD_CELL_STATE_EMPTY) {
                 // attempt to move piece from the origin to the destination
-                if (Board.movePieceFromCell(originCell, toDestinationCell: destinationCell)) {
-                    // move successful
+                let board = collectionView as! Board
+                // if move is legal
+                if (board.isMoveLegalFromOriginIndexPath(self.originIndexPath!, toDestinationIndexPath: destinationIndexPath)) {
+                    // execute move
+                    board.movePieceFromCell(originCell, atIndexPath: self.originIndexPath!, toDestinationCell: destinationCell, atIndexPath: destinationIndexPath)
+                    
+                    // deselect cells
                     collectionView.deselectItemAtIndexPath(self.originIndexPath!, animated: false)
                     collectionView.deselectItemAtIndexPath(destinationIndexPath, animated: false)
                 } else {
                     // illegal move
+                    originCell.backgroundColor = Board.COLOR
+                    collectionView.deselectItemAtIndexPath(self.originIndexPath!, animated: false)
+                    collectionView.deselectItemAtIndexPath(destinationIndexPath, animated: false)
                 }
             } else {
                 // illegal move
