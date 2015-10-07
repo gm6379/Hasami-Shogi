@@ -66,14 +66,23 @@ public class Board: UICollectionView {
     }
     
     // works out if a move is legal
-    public func isMoveLegalFromOriginIndexPath(origin: NSIndexPath, toDestinationIndexPath destination: NSIndexPath) {
+    public func isMoveLegalFromOriginIndexPath(origin: NSIndexPath, toDestinationIndexPath destination: NSIndexPath) -> Bool {
         // check for a diagonal move
-        if (origin.item != destination.item &&
-            origin.length != destination.length) {
+        if (origin.section != destination.section &&
+            origin.item != destination.item) {
+            return false
+        } else { // check for a collision
+            // obtain reference to cells on the route to the destination are occupied
+            let indexPaths: [NSIndexPath]
             
+            if (origin.section == destination.section) { // a horizontal move
+                
+            } else { // a vertical move
+                
+            }
         }
-        // check for a collision
         
+        return true
     }
 
     required public init?(coder aDecoder: NSCoder) {

@@ -58,7 +58,10 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! BoardCollectionViewCell;
         let selectedCells = collectionView.indexPathsForSelectedItems()
-        print(selectedCells!)
+        let i = collectionView.indexPathsForSelectedItems()?.first
+        print(i)
+        print(i?.section)
+        print(i?.item)
         
         // if cell is only cell selected
         // and cell has a piece in
