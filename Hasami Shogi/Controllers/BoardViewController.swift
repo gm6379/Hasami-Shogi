@@ -50,9 +50,15 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
         return cell
     }
     
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath)
+        cell?.backgroundColor = Board.COLOR
+    }
+    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! BoardCollectionViewCell;
         let selectedCells = collectionView.indexPathsForSelectedItems()
+        print(selectedCells!)
         
         // if cell is only cell selected
         // and cell has a piece in
@@ -82,6 +88,7 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
                 collectionView.deselectItemAtIndexPath(destinationIndexPath, animated: false)
             }
         } else { // deselect the cell
+            cell.backgroundColor = Board.COLOR
             collectionView.deselectItemAtIndexPath(indexPath, animated: false)
         }
     }
