@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Hasami Shogi/Controllers/BoardViewController.swift"
-            timestampString = "465925707.1124"
+            filePath = "Hasami Shogi/Controllers/Board.swift"
+            timestampString = "470414120.211594"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "collectionView(_:didSelectItemAtIndexPath:)"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "isMoveLegalFromOriginCell(_:atIndexPath:toDestinationCell:atIndexPath:inCollectionView:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "99"
             endingLineNumber = "99"
-            landmarkName = "checkCollisionInDirection(_:fromOriginIndexPath:toDestinationIndexPath:)"
+            landmarkName = "moveDirectionFrom(_:toDestinationIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "131"
             endingLineNumber = "131"
-            landmarkName = "checkCollisionInDirection(_:fromOriginIndexPath:toDestinationIndexPath:)"
+            landmarkName = "init(coder:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -63,7 +63,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "115"
             endingLineNumber = "115"
-            landmarkName = "checkCollisionInDirection(_:fromOriginIndexPath:toDestinationIndexPath:)"
+            landmarkName = "nextIndexPathInMoveDirection(_:currentIndexPath:collectionView:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -79,7 +79,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "122"
             endingLineNumber = "122"
-            landmarkName = "checkCollisionInDirection(_:fromOriginIndexPath:toDestinationIndexPath:)"
+            landmarkName = "nextIndexPathInMoveDirection(_:currentIndexPath:collectionView:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

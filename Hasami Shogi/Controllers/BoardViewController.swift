@@ -15,11 +15,6 @@ class BoardViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     var originIndexPath: NSIndexPath?
     //var destinationIndexPath: NSIndexPath?
 }
@@ -77,13 +72,9 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
             // if origin cell is not empty and destination cell is empty
             if (originCell.state != BoardCollectionViewCell.BOARD_CELL_STATE_EMPTY && destinationCell.state == BoardCollectionViewCell.BOARD_CELL_STATE_EMPTY) {
                 // attempt to move piece from the origin to the destination
-                let board = collectionView as! Board
-                // if move is legal
-                if (board.isMoveLegalFromOriginIndexPath(self.originIndexPath!, toDestinationIndexPath: destinationIndexPath)) {
-                    // execute move
-                    board.movePieceFromCell(originCell, atIndexPath: self.originIndexPath!, toDestinationCell: destinationCell, atIndexPath: destinationIndexPath)
-                    
-                    // deselect cells
+                if (Board.isMoveLegalFromOriginCell(originCell, atIndexPath: originIndexPath!, toDestinationCell: destinationCell, atIndexPath: destinationIndexPath, inCollectionView: collectionView)) {
+                    Board.movePieceFromCell(originCell, toDestinationCell: destinationCell)
+                    // move successful
                     collectionView.deselectItemAtIndexPath(self.originIndexPath!, animated: false)
                     collectionView.deselectItemAtIndexPath(destinationIndexPath, animated: false)
                 } else {
