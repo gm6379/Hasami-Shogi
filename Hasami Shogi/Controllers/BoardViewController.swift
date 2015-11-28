@@ -83,8 +83,10 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
                     collectionView.deselectItemAtIndexPath(destinationIndexPath, animated: false)
                     
                     // check for capture
-                    if (board.captureOccurredAtCell(destinationCell, atIndexPath: destinationIndexPath)) {
+                    let capturableCells = board.capturableCellsFromCell(destinationCell, atIndexPath: destinationIndexPath)
+                    if (capturableCells != nil) {
                         // capture necessary pieces
+                        board.capturePiecesInCells(capturableCells!)
                     }
                 } else {
                     // illegal move

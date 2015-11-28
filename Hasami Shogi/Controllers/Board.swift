@@ -77,10 +77,10 @@ public class Board: UICollectionView {
             let direction = self.moveDirectionFrom(origin, toDestinationIndexPath: destination)
             
             var currentIndexPath = nextIndexPathInMoveDirection(direction, currentIndexPath: origin)
-            var cell: BoardCollectionViewCell = cellForItemAtIndexPath(currentIndexPath) as! BoardCollectionViewCell
+            var cell: BoardCollectionViewCell = cellForItemAtIndexPath(currentIndexPath!) as! BoardCollectionViewCell
             while cell.state == BoardCollectionViewCell.BOARD_CELL_STATE_EMPTY && !cell.isEqual(destinationCell) {
-                currentIndexPath = nextIndexPathInMoveDirection(direction, currentIndexPath: currentIndexPath)
-                cell = cellForItemAtIndexPath(currentIndexPath) as! BoardCollectionViewCell
+                currentIndexPath = nextIndexPathInMoveDirection(direction, currentIndexPath: currentIndexPath!)
+                cell = cellForItemAtIndexPath(currentIndexPath!) as! BoardCollectionViewCell
             }
             
             if (cell.isEqual(destinationCell)) {
@@ -92,70 +92,108 @@ public class Board: UICollectionView {
     }
     
     // does move result in a capture
-    public func captureOccurredAtCell(cell: BoardCollectionViewCell, atIndexPath indexPath: NSIndexPath) -> Bool {
+    public func capturableCellsFromCell(cell: BoardCollectionViewCell, atIndexPath indexPath: NSIndexPath) -> Array<BoardCollectionViewCell>? {
         // determine if any of the immediate cells around the current contain the opposite piece color
         let directions = determineCaptureSearchDirectionsForCell(cell, indexPath: indexPath)
         if (directions.isEmpty) {
-            return false
+            return nil
         } else {
             // search directions for capture
             for direction in directions {
                 var currentIndexPath = nextIndexPathInMoveDirection(direction, currentIndexPath: indexPath);
-                var currentCell: BoardCollectionViewCell = cellForItemAtIndexPath(currentIndexPath) as! BoardCollectionViewCell
-                
-                var edgeOfBoard: Int
-                if (direction == .MoveDirectionUp || direction == .MoveDirectionLeft) {
-                    edgeOfBoard = 0
-                } else {
-                    edgeOfBoard = 8;
-                }
-                
-                if (direction == .MoveDirectionUp || direction == .MoveDirectionDown) {
-                    while currentCell.state != cell.state && currentIndexPath.section != edgeOfBoard {
-                        currentIndexPath = nextIndexPathInMoveDirection(direction, currentIndexPath: currentIndexPath)
-                        currentCell = cellForItemAtIndexPath(currentIndexPath) as! BoardCollectionViewCell
+                if (currentIndexPath != nil) {
+                    var currentCell: BoardCollectionViewCell = cellForItemAtIndexPath(currentIndexPath!) as! BoardCollectionViewCell
+                    
+                    var oppositeState: BoardCollectionViewCell.BoardCellState
+                    if (cell.state == BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE) {
+                        oppositeState = BoardCollectionViewCell.BOARD_CELL_STATE_BLACK_PIECE
+                    } else {
+                        oppositeState = BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE;
                     }
-                } else {
-                    while currentCell.state != cell.state && currentIndexPath.row != edgeOfBoard {
-                        currentIndexPath = nextIndexPathInMoveDirection(direction, currentIndexPath: currentIndexPath)
-                        currentCell = cellForItemAtIndexPath(currentIndexPath) as! BoardCollectionViewCell
+                    
+                    var edgeOfBoard: Int
+                    if (direction == .MoveDirectionUp || direction == .MoveDirectionLeft) {
+                        edgeOfBoard = 0
+                    } else {
+                        edgeOfBoard = 8;
+                    }
+                    
+                    var opposingCells = [BoardCollectionViewCell]()
+                    opposingCells.append(currentCell)
+                    if (direction == .MoveDirectionUp || direction == .MoveDirectionDown) {
+                        while currentCell.state == oppositeState && currentIndexPath!.section != edgeOfBoard {
+                            currentIndexPath = nextIndexPathInMoveDirection(direction, currentIndexPath: currentIndexPath!)
+                            currentCell = cellForItemAtIndexPath(currentIndexPath!) as! BoardCollectionViewCell
+                            if (currentCell.state != cell.state) {
+                                opposingCells.append(currentCell)
+                            }
+                        }
+                    } else {
+                        while currentCell.state == oppositeState && currentIndexPath!.row != edgeOfBoard {
+                            currentIndexPath = nextIndexPathInMoveDirection(direction, currentIndexPath: currentIndexPath!)
+                            currentCell = cellForItemAtIndexPath(currentIndexPath!) as! BoardCollectionViewCell
+                            if (currentCell.state != cell.state) {
+                                opposingCells.append(currentCell)
+                            }
+                        }
+                    }
+                    
+                    if (currentCell.state == cell.state) {
+                        return opposingCells
+                    } else {
+                        return nil
                     }
                 }
                 
-                if (currentCell.state == cell.state) {
-                    return true
-                } else {
-                    return false
-                }
             }
         }
         
-        
-        return true
+        return nil
+    }
+    
+    // capture the required pieces
+    public func capturePiecesInCells(cells: Array<BoardCollectionViewCell>) {
+        for cell in cells {
+            removePieceFromCell(cell)
+        }
     }
     
     // determine directions to iterate
     private func determineCaptureSearchDirectionsForCell(cell: BoardCollectionViewCell, indexPath: NSIndexPath) -> Array<MoveDirection> {
-        let cellAbove = cellForItemAtIndexPath(nextIndexPathInMoveDirection(.MoveDirectionUp, currentIndexPath: indexPath)) as! BoardCollectionViewCell
-        let cellBelow = cellForItemAtIndexPath(nextIndexPathInMoveDirection(.MoveDirectionDown, currentIndexPath: indexPath))  as! BoardCollectionViewCell
-        let cellLeft = cellForItemAtIndexPath(nextIndexPathInMoveDirection(.MoveDirectionLeft, currentIndexPath: indexPath))  as! BoardCollectionViewCell
-        let cellRight = cellForItemAtIndexPath(nextIndexPathInMoveDirection(.MoveDirectionRight, currentIndexPath: indexPath))  as! BoardCollectionViewCell
-        let cells = [cellAbove,  cellBelow, cellLeft, cellRight]
+        // create an array of all possible directions
+        let possibleDirections = [MoveDirection.MoveDirectionUp, .MoveDirectionDown, .MoveDirectionLeft, .MoveDirectionRight]
+        
+        // create an array of all cells surrounding current cell, taking into account the edge of the board
+        var surroundingCells = [BoardCollectionViewCell?]()
+        for direction in possibleDirections {
+            let surroundingCellIndexPath = nextIndexPathInMoveDirection(direction, currentIndexPath: indexPath);
+            let surroundingCell: BoardCollectionViewCell?
+            if (surroundingCellIndexPath != nil) {
+                surroundingCell = cellForItemAtIndexPath(surroundingCellIndexPath!) as? BoardCollectionViewCell
+                surroundingCells.append(surroundingCell)
+            } else {
+                surroundingCells.append(nil)
+            }
+        }
+        
+        // determine directions to search for cells to be captured
         var directions = [MoveDirection]()
-        for var i = 0; i < cells.count; i++ {
-            let surroundingCell = cells[i];
-            // check if the cell contains opposing piece
-            if ((           cell.state == BoardCollectionViewCell.BOARD_CELL_STATE_BLACK_PIECE &&
-                 surroundingCell.state == BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE) ||
-                           (cell.state == BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE &&
-                 surroundingCell.state == BoardCollectionViewCell.BOARD_CELL_STATE_BLACK_PIECE)) {
-                switch (i) {
-                    case 0: directions.append(.MoveDirectionUp)
-                    case 1: directions.append(.MoveDirectionDown)
-                    case 2: directions.append(.MoveDirectionLeft)
-                    case 3: directions.append(.MoveDirectionRight)
-                    default:
-                        break
+        for var i = 0; i < surroundingCells.count; i++ {
+            let surroundingCell = surroundingCells[i];
+            if (surroundingCell != nil) {
+                // check if the cell contains an opposing piece
+                if ((           cell.state == BoardCollectionViewCell.BOARD_CELL_STATE_BLACK_PIECE &&
+                    surroundingCell!.state == BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE) ||
+                               (cell.state == BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE &&
+                    surroundingCell!.state == BoardCollectionViewCell.BOARD_CELL_STATE_BLACK_PIECE)) {
+                            switch (i) {
+                            case 0: directions.append(.MoveDirectionUp)
+                            case 1: directions.append(.MoveDirectionDown)
+                            case 2: directions.append(.MoveDirectionLeft)
+                            case 3: directions.append(.MoveDirectionRight)
+                            default:
+                                break
+                            }
                 }
             }
         }
@@ -179,17 +217,25 @@ public class Board: UICollectionView {
         }
     }
     
-    private func nextIndexPathInMoveDirection(direction: MoveDirection, currentIndexPath current: NSIndexPath) -> NSIndexPath {
-        let indexPath: NSIndexPath
+    private func nextIndexPathInMoveDirection(direction: MoveDirection, currentIndexPath current: NSIndexPath) -> NSIndexPath? {
+        var indexPath: NSIndexPath?
         switch (direction) {
         case .MoveDirectionUp:
-            indexPath = NSIndexPath(forItem: current.item, inSection: current.section - 1)
+            if (current.section > 0) {
+                indexPath = NSIndexPath(forItem: current.item, inSection: current.section - 1)
+            }
         case .MoveDirectionDown:
-            indexPath = NSIndexPath(forItem: current.item, inSection: current.section + 1)
+            if (current.section < 8) {
+                indexPath = NSIndexPath(forItem: current.item, inSection: current.section + 1)
+            }
         case .MoveDirectionLeft:
-            indexPath = NSIndexPath(forItem: current.item - 1, inSection: current.section)
+            if (current.row > 0) {
+                indexPath = NSIndexPath(forItem: current.item - 1, inSection: current.section)
+            }
         case .MoveDirectionRight:
-            indexPath = NSIndexPath(forItem: current.item + 1, inSection: current.section)
+            if (current.row < 8) {
+                indexPath = NSIndexPath(forItem: current.item + 1, inSection: current.section)
+            }
         }
         
         return indexPath
