@@ -35,10 +35,12 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
         cell.layer.borderColor = UIColor.blackColor().CGColor
         cell.layer.borderWidth = 1.0
         
+        let board = collectionView as! Board
+        
         if (indexPath.section == 0) {
-            Board.drawPieceInCell(cell, withState: BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE)
+            board.drawPieceInCell(cell, withState: BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE)
         } else if (indexPath.section == 8) {
-            Board.drawPieceInCell(cell, withState: BoardCollectionViewCell.BOARD_CELL_STATE_BLACK_PIECE)
+            board.drawPieceInCell(cell, withState: BoardCollectionViewCell.BOARD_CELL_STATE_BLACK_PIECE)
         }
         cell.backgroundColor = Board.COLOR
 
@@ -69,14 +71,21 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
             let originCell = collectionView.cellForItemAtIndexPath((self.originIndexPath)!) as! BoardCollectionViewCell
             let destinationCell = collectionView.cellForItemAtIndexPath(destinationIndexPath) as! BoardCollectionViewCell
             
+            let board = collectionView as! Board
+            
             // if origin cell is not empty and destination cell is empty
             if (originCell.state != BoardCollectionViewCell.BOARD_CELL_STATE_EMPTY && destinationCell.state == BoardCollectionViewCell.BOARD_CELL_STATE_EMPTY) {
                 // attempt to move piece from the origin to the destination
-                if (Board.isMoveLegalFromOriginCell(originCell, atIndexPath: originIndexPath!, toDestinationCell: destinationCell, atIndexPath: destinationIndexPath, inCollectionView: collectionView)) {
-                    Board.movePieceFromCell(originCell, toDestinationCell: destinationCell)
+                if (board.isMoveLegalFromOriginCell(originCell, atIndexPath: originIndexPath!, toDestinationCell: destinationCell, atIndexPath: destinationIndexPath)) {
                     // move successful
+                    board.movePieceFromCell(originCell, toDestinationCell: destinationCell)
                     collectionView.deselectItemAtIndexPath(self.originIndexPath!, animated: false)
                     collectionView.deselectItemAtIndexPath(destinationIndexPath, animated: false)
+                    
+                    // check for capture
+                    if (board.captureOccurredAtCell(destinationCell, atIndexPath: destinationIndexPath)) {
+                        // capture necessary pieces
+                    }
                 } else {
                     // illegal move
                     originCell.backgroundColor = Board.COLOR
