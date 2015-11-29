@@ -42,15 +42,59 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="vK5-cU-If1"/>
                                 </connections>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyA-Ag-hnn">
+                                <rect key="frame" x="16" y="419" width="60" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UcN-bx-wAL" customClass="BoardCollectionViewCell" customModule="Hasami_Shogi" customModuleProvider="target">
+                                <rect key="frame" x="244" y="354" width="60" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="4Wo-EQ-fhw"/>
+                                    <constraint firstAttribute="height" constant="60" id="dfX-Ed-2M4"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I7d-6a-Qyf" customClass="BoardCollectionViewCell" customModule="Hasami_Shogi" customModuleProvider="target">
+                                <rect key="frame" x="16" y="354" width="60" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="JyR-ex-HEi"/>
+                                    <constraint firstAttribute="height" constant="60" id="P16-zr-aPZ"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NPU-Hc-hz2">
+                                <rect key="frame" x="244" y="419" width="62" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="UcN-bx-wAL" firstAttribute="trailing" secondItem="gPG-i0-Fzk" secondAttribute="trailing" id="1uR-6D-VDe"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gPG-i0-Fzk" secondAttribute="bottom" constant="227" id="2zP-6m-CER"/>
+                            <constraint firstItem="eyA-Ag-hnn" firstAttribute="top" secondItem="I7d-6a-Qyf" secondAttribute="bottom" constant="5" id="4V6-cd-0gs"/>
+                            <constraint firstItem="UcN-bx-wAL" firstAttribute="top" secondItem="I7d-6a-Qyf" secondAttribute="top" id="NxB-9k-p6u"/>
+                            <constraint firstItem="eyA-Ag-hnn" firstAttribute="leading" secondItem="I7d-6a-Qyf" secondAttribute="leading" id="ODy-2B-gkO"/>
                             <constraint firstItem="gPG-i0-Fzk" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="QgV-YP-NSc"/>
                             <constraint firstItem="gPG-i0-Fzk" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="33" id="bry-mf-aP1"/>
+                            <constraint firstItem="I7d-6a-Qyf" firstAttribute="leading" secondItem="gPG-i0-Fzk" secondAttribute="leading" id="eYA-PV-ecj"/>
+                            <constraint firstItem="UcN-bx-wAL" firstAttribute="width" secondItem="I7d-6a-Qyf" secondAttribute="width" id="eom-5C-Wkc"/>
+                            <constraint firstItem="eyA-Ag-hnn" firstAttribute="trailing" secondItem="I7d-6a-Qyf" secondAttribute="trailing" id="gY9-jR-nrs"/>
+                            <constraint firstItem="NPU-Hc-hz2" firstAttribute="trailing" secondItem="UcN-bx-wAL" secondAttribute="trailing" constant="2" id="mGB-V1-iDQ"/>
+                            <constraint firstItem="NPU-Hc-hz2" firstAttribute="leading" secondItem="UcN-bx-wAL" secondAttribute="leading" id="mac-6Y-UOF"/>
                             <constraint firstItem="gPG-i0-Fzk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ooM-O3-nRk"/>
+                            <constraint firstItem="eyA-Ag-hnn" firstAttribute="baseline" secondItem="NPU-Hc-hz2" secondAttribute="baseline" id="rM6-kj-Ym9"/>
+                            <constraint firstItem="UcN-bx-wAL" firstAttribute="top" secondItem="gPG-i0-Fzk" secondAttribute="bottom" constant="13" id="sI8-p0-m6a"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="board" destination="gPG-i0-Fzk" id="Xo8-iP-74T"/>
+                        <outlet property="player1Indicator" destination="I7d-6a-Qyf" id="rnZ-kd-EcN"/>
+                        <outlet property="player2Indicator" destination="UcN-bx-wAL" id="YcE-ma-CeR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

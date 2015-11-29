@@ -9,14 +9,46 @@
 import UIKit
 
 class BoardViewController: UIViewController {
+    
+    @IBOutlet weak var player1Indicator: BoardCollectionViewCell!
+    @IBOutlet weak var player2Indicator: BoardCollectionViewCell!
+    @IBOutlet weak var board: Board!
+    var currentPlayer: Int = Game.sharedInstance.currentPlayer
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        board.drawPieceInCell(player1Indicator, withState: BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE)
+        player1Indicator.layer.borderWidth = 1.0
+        board.drawPieceInCell(player2Indicator, withState: BoardCollectionViewCell.BOARD_CELL_STATE_BLACK_PIECE)
+        player2Indicator.layer.borderWidth = 1.0
+        
+        highlightCurrentPlayer()
     }
 
     var originIndexPath: NSIndexPath?
-    //var destinationIndexPath: NSIndexPath?
+    
+    func updateCurrentPlayer() {
+        if (currentPlayer == Game.sharedInstance.PLAYER_1) {
+            Game.sharedInstance.currentPlayer = Game.sharedInstance.PLAYER_2
+        } else {
+            Game.sharedInstance.currentPlayer = Game.sharedInstance.PLAYER_1
+        }
+        currentPlayer = Game.sharedInstance.currentPlayer
+        highlightCurrentPlayer()
+    }
+    
+    func highlightCurrentPlayer() {
+        let currentPlayer = Game.sharedInstance.currentPlayer
+        if (currentPlayer == Game.sharedInstance.PLAYER_1) {
+            player1Indicator.layer.borderColor = UIColor.redColor().CGColor
+            player2Indicator.layer.borderColor = UIColor.clearColor().CGColor
+        } else {
+            player2Indicator.layer.borderColor = UIColor.redColor().CGColor
+            player1Indicator.layer.borderColor = UIColor.clearColor().CGColor
+        }
+    }
 }
 
 extension BoardViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -35,13 +67,22 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
         cell.layer.borderColor = UIColor.blackColor().CGColor
         cell.layer.borderWidth = 1.0
         
-        let board = collectionView as! Board
+        //let board = collectionView as! Board
         
-        if (indexPath.section == 0) {
-            board.drawPieceInCell(cell, withState: BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE)
-        } else if (indexPath.section == 8) {
-            board.drawPieceInCell(cell, withState: BoardCollectionViewCell.BOARD_CELL_STATE_BLACK_PIECE)
+        if (Game.sharedInstance.style == Game.GameStyle.HasamiShogi) {
+            if (indexPath.section == 0) {
+                board.drawPieceInCell(cell, withState: BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE)
+            } else if (indexPath.section == 8) {
+                board.drawPieceInCell(cell, withState: BoardCollectionViewCell.BOARD_CELL_STATE_BLACK_PIECE)
+            }
+        } else {
+            if (indexPath.section == 0 || indexPath.section == 1) {
+                board.drawPieceInCell(cell, withState: BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE)
+            } else if (indexPath.section == 7 || indexPath.section == 8) {
+                board.drawPieceInCell(cell, withState: BoardCollectionViewCell.BOARD_CELL_STATE_BLACK_PIECE)
+            }
         }
+        
         cell.backgroundColor = Board.COLOR
 
         return cell
@@ -60,9 +101,19 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
         print(i?.section)
         print(i?.item)
         
+        // current player can only select his/her pieces
+        // player 1 = white
+        // player 2 = black
+        var currentPlayerState: BoardCollectionViewCell.BoardCellState
+        if (currentPlayer == Game.sharedInstance.PLAYER_1) {
+            currentPlayerState = BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE
+        } else {
+            currentPlayerState = BoardCollectionViewCell.BOARD_CELL_STATE_BLACK_PIECE
+        }
+        
         // if cell is only cell selected
         // and cell has a piece in
-        if (selectedCells?.count == 1 && cell.state != BoardCollectionViewCell.BOARD_CELL_STATE_EMPTY) {
+        if (selectedCells?.count == 1 && cell.state == currentPlayerState) {
             self.originIndexPath = indexPath
             cell.backgroundColor = UIColor.redColor()
         } else if (selectedCells?.count == 2) { // if two cells are selected
@@ -88,6 +139,9 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
                         // capture necessary pieces
                         board.capturePiecesInCells(capturableCells!)
                     }
+                    
+                    // update current player
+                    updateCurrentPlayer()
                 } else {
                     // illegal move
                     originCell.backgroundColor = Board.COLOR

@@ -10,6 +10,8 @@ import UIKit
 
 class Game: NSObject {
     
+    static let sharedInstance = Game()
+    
     enum GameStyle {
         case HasamiShogi, DaHasamiShogi
     }
@@ -17,5 +19,6 @@ class Game: NSObject {
     let PLAYER_1 = 1
     let PLAYER_2 = 2
     
-    var currentPlayer = 0    
+    var currentPlayer = 1
+    var style = GameStyle.HasamiShogi
 }
