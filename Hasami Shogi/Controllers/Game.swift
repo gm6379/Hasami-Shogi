@@ -13,17 +13,17 @@ class Game: NSObject {
     static let sharedInstance = Game()
     
     enum GameStyle: Int {
-        case HasamiShogi, DaHasamiShogi
+        case HasamiShogi, DaiHasamiShogi
     }
     
     let PLAYER_1 = 1
     let PLAYER_2 = 2
     
     var currentPlayer = 1
-    var style = GameStyle.HasamiShogi
+    var style = GameStyle.DaiHasamiShogi
     
     var numberOfStartPieces: Int {
-        get{
+        get {
             return style == .HasamiShogi ? 9 : 18
         }
     }
@@ -39,14 +39,18 @@ class Game: NSObject {
         }
     }
     
-    func checkForWinner(piecesInARow: Int) -> Int? {
-        if (currentPlayer == PLAYER_1 && piecesInARow == 5) {
-            return PLAYER_1
-        } else if (currentPlayer == PLAYER_2 && piecesInARow == 5) {
-            return PLAYER_2
-        } else {
-            return nil
+    func checkForWinner(piecesInARow: [Int]) -> Int? {
+        for numberOfPieces in piecesInARow {
+            if (currentPlayer == PLAYER_1 && numberOfPieces == 5) {
+                return PLAYER_1
+            } else if (currentPlayer == PLAYER_2 && numberOfPieces == 5) {
+                return PLAYER_2
+            } else {
+                return nil
+            }
         }
+        
+        return nil
     }
     
 }

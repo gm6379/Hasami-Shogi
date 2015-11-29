@@ -143,10 +143,18 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
                         }
                     }
                     
-                    if (Game.sharedInstance.style == Game.GameStyle.DaHasamiShogi) {
-                        let friendlyCells = board.friendlyCellsFromCell(destinationCell, atIndexPath: destinationIndexPath)
+                    if (Game.sharedInstance.style == Game.GameStyle.DaiHasamiShogi) {
+                        let friendlyCells = board.numberOfFriendlyCellsFromCell(destinationCell, atIndexPath: destinationIndexPath)
                         if (friendlyCells != nil) {
+                            let winner = Game.sharedInstance.checkForWinner(friendlyCells!)
                             
+                            if (winner != nil) {
+                                if (winner == Game.sharedInstance.PLAYER_1) {
+                                    print("player 1 wins")
+                                } else {
+                                    print("player 2 wins")
+                                }
+                            }
                         }
                     }
                     

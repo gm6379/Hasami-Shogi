@@ -147,18 +147,19 @@ public class Board: UICollectionView {
     }
     
     // return friendly cells from the specified cell
-    public func friendlyCellsFromCell(cell: BoardCollectionViewCell, atIndexPath indexPath: NSIndexPath) -> Array<BoardCollectionViewCell>? {
+    public func numberOfFriendlyCellsFromCell(cell: BoardCollectionViewCell, atIndexPath indexPath: NSIndexPath) -> [Int]? {
         let directions = determineSearchDirectionsForCell(cell, indexPath: indexPath, friendly: true)
         if (directions.isEmpty) {
             return nil
         } else {
+            var numberOfFriendlyCellsArray = [Int]()
             // search directions for friendly cells
             for direction in directions {
                 var currentIndexPath = nextIndexPathInMoveDirection(direction, currentIndexPath: indexPath);
                 if (currentIndexPath != nil) {
                     var currentCell: BoardCollectionViewCell = cellForItemAtIndexPath(currentIndexPath!) as! BoardCollectionViewCell
                     
-                    var friendlyCells = [BoardCollectionViewCell]()
+                    var numberOfFriendlyCells = 0
                     
                     var verticalEdge: Int?
                     var horizontalEdge: Int?
@@ -186,15 +187,16 @@ public class Board: UICollectionView {
                         currentIndexPath = nextIndexPathInMoveDirection(direction, currentIndexPath: currentIndexPath!)
                         currentCell = cellForItemAtIndexPath(currentIndexPath!) as! BoardCollectionViewCell
                         if (currentCell.state == cell.state) {
-                            friendlyCells.append(currentCell)
+                            numberOfFriendlyCells += 1
                         }
                     }
                     
-                    return friendlyCells
+                    numberOfFriendlyCellsArray.append(numberOfFriendlyCells)
                 }
             }
+            
+            return numberOfFriendlyCellsArray
         }
-        return nil
     }
     
     // capture the required pieces
@@ -210,7 +212,7 @@ public class Board: UICollectionView {
     }
     
     // determine directions to iterate
-    private func determineSearchDirectionsForCell(cell: BoardCollectionViewCell, indexPath: NSIndexPath, friendly: Bool) -> Array<Direction> {
+    private func determineSearchDirectionsForCell(cell: BoardCollectionViewCell, indexPath: NSIndexPath, friendly: Bool) -> [Direction] {
         // create an array of all possible directions
         var possibleDirections: [Direction]
         if (friendly) {
@@ -238,27 +240,33 @@ public class Board: UICollectionView {
             let surroundingCell = surroundingCells[i];
             if (surroundingCell != nil) {
                 // check if the cell contains an opposing piece
-                if ((           cell.state == BoardCollectionViewCell.BOARD_CELL_STATE_BLACK_PIECE &&
-                    surroundingCell!.state == BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE) ||
-                    (cell.state == BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE &&
-                    surroundingCell!.state == BoardCollectionViewCell.BOARD_CELL_STATE_BLACK_PIECE)) {
-                        switch (i) {
-                        case 0: directions.append(.DirectionNorth)
-                        case 1: directions.append(.DirectionSouth)
-                        case 2: directions.append(.DirectionWest)
-                        case 3: directions.append(.DirectionEast)
-                        case 4: directions.append(.DirectionNorthEast)
-                        case 5: directions.append(.DirectionNorthWest)
-                        case 6: directions.append(.DirectionSouthEast)
-                        case 7: directions.append(.DirectionSouthWest)
-                        default:
-                            break
-                        }
+                if ((!friendly && cell.state == BoardCollectionViewCell.BOARD_CELL_STATE_BLACK_PIECE &&
+                      surroundingCell!.state == BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE) ||
+                                 (cell.state == BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE &&
+                      surroundingCell!.state == BoardCollectionViewCell.BOARD_CELL_STATE_BLACK_PIECE)) {
+                     appendDirection(i, directions: &directions)
+                } else if (friendly && cell.state == surroundingCell!.state) {
+                    appendDirection(i, directions: &directions)
                 }
             }
         }
         
         return directions
+    }
+    
+    private func appendDirection(direction: Int, inout directions: [Direction]) {
+        switch (direction) {
+            case 0: directions.append(.DirectionNorth)
+            case 1: directions.append(.DirectionSouth)
+            case 2: directions.append(.DirectionWest)
+            case 3: directions.append(.DirectionEast)
+            case 4: directions.append(.DirectionNorthEast)
+            case 5: directions.append(.DirectionNorthWest)
+            case 6: directions.append(.DirectionSouthEast)
+            case 7: directions.append(.DirectionSouthWest)
+            default:
+                break
+        }
     }
     
     private func moveDirectionFrom(origin: NSIndexPath, toDestinationIndexPath destination: NSIndexPath) -> Direction {
