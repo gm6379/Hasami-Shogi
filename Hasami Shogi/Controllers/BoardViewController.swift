@@ -67,8 +67,6 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
         cell.layer.borderColor = UIColor.blackColor().CGColor
         cell.layer.borderWidth = 1.0
         
-        //let board = collectionView as! Board
-        
         if (Game.sharedInstance.style == Game.GameStyle.HasamiShogi) {
             if (indexPath.section == 0) {
                 board.drawPieceInCell(cell, withState: BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE)
@@ -97,9 +95,6 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! BoardCollectionViewCell;
         let selectedCells = collectionView.indexPathsForSelectedItems()
         let i = collectionView.indexPathsForSelectedItems()?.first
-        print(i)
-        print(i?.section)
-        print(i?.item)
         
         // current player can only select his/her pieces
         // player 1 = white
@@ -138,6 +133,11 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
                     if (capturableCells != nil) {
                         // capture necessary pieces
                         board.capturePiecesInCells(capturableCells!)
+                        
+                        let winner = Game.sharedInstance.checkForWinner(board)
+                        if (winner != nil) {
+                            print(winner)
+                        }
                     }
                     
                     // update current player
