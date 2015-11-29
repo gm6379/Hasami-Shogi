@@ -39,4 +39,14 @@ class Game: NSObject {
         }
     }
     
+    func checkForWinner(piecesInARow: Int) -> Int? {
+        if (currentPlayer == PLAYER_1 && piecesInARow == 5) {
+            return PLAYER_1
+        } else if (currentPlayer == PLAYER_2 && piecesInARow == 5) {
+            return PLAYER_2
+        } else {
+            return nil
+        }
+    }
+    
 }

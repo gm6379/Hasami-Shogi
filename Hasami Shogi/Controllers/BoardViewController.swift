@@ -94,7 +94,6 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! BoardCollectionViewCell;
         let selectedCells = collectionView.indexPathsForSelectedItems()
-        let i = collectionView.indexPathsForSelectedItems()?.first
         
         // current player can only select his/her pieces
         // player 1 = white
@@ -141,6 +140,13 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
                             } else {
                                 print("player 2 wins")
                             }
+                        }
+                    }
+                    
+                    if (Game.sharedInstance.style == Game.GameStyle.DaHasamiShogi) {
+                        let friendlyCells = board.friendlyCellsFromCell(destinationCell, atIndexPath: destinationIndexPath)
+                        if (friendlyCells != nil) {
+                            
                         }
                     }
                     
