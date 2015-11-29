@@ -136,7 +136,11 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
                         
                         let winner = Game.sharedInstance.checkForWinner(board)
                         if (winner != nil) {
-                            print(winner)
+                            if (winner == Game.sharedInstance.PLAYER_1) {
+                                print("player 1 wins")
+                            } else {
+                                print("player 2 wins")
+                            }
                         }
                     }
                     

@@ -18,6 +18,10 @@ public class Board: UICollectionView {
     private enum MoveDirection {
         case MoveDirectionUp, MoveDirectionDown, MoveDirectionRight, MoveDirectionLeft
     }
+    
+    private enum Direction {
+        case DirectionNorth, DirectionNorthEast, DirectionEast, DirectionSouthEast, DirectionSouth, DirectionSouthWest, DirectionWest, DirectionNorthWest
+    }
 
     public func getNumberOfWhiteCells() -> Int {
         return numberOfWhiteCells
@@ -83,7 +87,7 @@ public class Board: UICollectionView {
         }
     }
     
-    // does move result in a capture
+    // return cells that can be captured from the specified cell
     public func capturableCellsFromCell(cell: BoardCollectionViewCell, atIndexPath indexPath: NSIndexPath) -> Array<BoardCollectionViewCell>? {
         // determine if any of the immediate cells around the current contain the opposite piece color
         let directions = determineCaptureSearchDirectionsForCell(cell, indexPath: indexPath)
