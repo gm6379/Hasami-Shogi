@@ -15,9 +15,14 @@
 		A95B11041BB9C7CF00AB03A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A95B11021BB9C7CF00AB03A0 /* LaunchScreen.storyboard */; };
 		A95B110F1BB9C7CF00AB03A0 /* Hasami_ShogiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B110E1BB9C7CF00AB03A0 /* Hasami_ShogiTests.swift */; };
 		A95B111A1BB9C7CF00AB03A0 /* Hasami_ShogiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B11191BB9C7CF00AB03A0 /* Hasami_ShogiUITests.swift */; };
-		A9B766991BC3EABD00E74CAC /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B766981BC3EABD00E74CAC /* Board.swift */; settings = {ASSET_TAGS = (); }; };
-		A9B7669B1BC3FFAF00E74CAC /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B7669A1BC3FFAF00E74CAC /* Game.swift */; settings = {ASSET_TAGS = (); }; };
-		A9B7669F1BC40CB100E74CAC /* BoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B7669E1BC40CB100E74CAC /* BoardCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		A973CCE21C0CBC10002868DB /* Player+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A973CCE01C0CBC10002868DB /* Player+CoreDataProperties.swift */; };
+		A973CCE31C0CBC10002868DB /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = A973CCE11C0CBC10002868DB /* Player.swift */; };
+		A973CCE71C0CC23E002868DB /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A973CCE61C0CC23E002868DB /* ContactsUI.framework */; };
+		A973CCE91C0CC2D4002868DB /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A973CCE81C0CC2D4002868DB /* Contacts.framework */; };
+		A973CCEB1C0CC329002868DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A973CCEA1C0CC329002868DB /* ViewController.swift */; };
+		A9B766991BC3EABD00E74CAC /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B766981BC3EABD00E74CAC /* Board.swift */; };
+		A9B7669B1BC3FFAF00E74CAC /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B7669A1BC3FFAF00E74CAC /* Game.swift */; };
+		A9B7669F1BC40CB100E74CAC /* BoardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B7669E1BC40CB100E74CAC /* BoardCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +57,11 @@
 		A95B11151BB9C7CF00AB03A0 /* Hasami ShogiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hasami ShogiUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A95B11191BB9C7CF00AB03A0 /* Hasami_ShogiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hasami_ShogiUITests.swift; sourceTree = "<group>"; };
 		A95B111B1BB9C7CF00AB03A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A973CCE01C0CBC10002868DB /* Player+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Player+CoreDataProperties.swift"; path = "../../Player+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A973CCE11C0CBC10002868DB /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = ../../Player.swift; sourceTree = "<group>"; };
+		A973CCE61C0CC23E002868DB /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
+		A973CCE81C0CC2D4002868DB /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		A973CCEA1C0CC329002868DB /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A9B766981BC3EABD00E74CAC /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Board.swift; path = "Hasami Shogi/Controllers/Board.swift"; sourceTree = SOURCE_ROOT; };
 		A9B7669A1BC3FFAF00E74CAC /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Game.swift; path = "Hasami Shogi/Controllers/Game.swift"; sourceTree = SOURCE_ROOT; };
 		A9B7669E1BC40CB100E74CAC /* BoardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BoardCollectionViewCell.swift; path = "Hasami Shogi/Controllers/BoardCollectionViewCell.swift"; sourceTree = SOURCE_ROOT; };
@@ -62,6 +72,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A973CCE91C0CC2D4002868DB /* Contacts.framework in Frameworks */,
+				A973CCE71C0CC23E002868DB /* ContactsUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +97,8 @@
 		A95B10EA1BB9C7CF00AB03A0 = {
 			isa = PBXGroup;
 			children = (
+				A973CCE81C0CC2D4002868DB /* Contacts.framework */,
+				A973CCE61C0CC23E002868DB /* ContactsUI.framework */,
 				A95B10F51BB9C7CF00AB03A0 /* Hasami Shogi */,
 				A95B110D1BB9C7CF00AB03A0 /* Hasami ShogiTests */,
 				A95B11181BB9C7CF00AB03A0 /* Hasami ShogiUITests */,
@@ -141,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				A95B10F81BB9C7CF00AB03A0 /* BoardViewController.swift */,
+				A973CCEA1C0CC329002868DB /* ViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -156,6 +171,8 @@
 		A95B11291BB9C8AF00AB03A0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A973CCE01C0CBC10002868DB /* Player+CoreDataProperties.swift */,
+				A973CCE11C0CBC10002868DB /* Player.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -302,6 +319,9 @@
 				A95B10F91BB9C7CF00AB03A0 /* BoardViewController.swift in Sources */,
 				A9B7669B1BC3FFAF00E74CAC /* Game.swift in Sources */,
 				A95B10F71BB9C7CF00AB03A0 /* AppDelegate.swift in Sources */,
+				A973CCEB1C0CC329002868DB /* ViewController.swift in Sources */,
+				A973CCE21C0CBC10002868DB /* Player+CoreDataProperties.swift in Sources */,
+				A973CCE31C0CBC10002868DB /* Player.swift in Sources */,
 				A9B766991BC3EABD00E74CAC /* Board.swift in Sources */,
 				A95B10FF1BB9C7CF00AB03A0 /* Hasami_Shogi.xcdatamodeld in Sources */,
 				A9B7669F1BC40CB100E74CAC /* BoardCollectionViewCell.swift in Sources */,

@@ -50,11 +50,25 @@ class BoardViewController: UIViewController {
         }
     }
     
-    @IBAction func restartGame(sender: UIButton) {
+    private func restartGame() {
         board.reloadData()
         Game.sharedInstance.currentPlayer = Game.sharedInstance.PLAYER_1
         currentPlayer = Game.sharedInstance.currentPlayer
         highlightCurrentPlayer()
+    }
+    
+    private func displayIllegalMoveError() {
+        let alert = UIAlertController(title: "Error", message: "Illegal move", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    private func displayWinnerMessage(winner: String) {
+        let alert = UIAlertController(title: "Winner!", message: "The winner was " + winner, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Restart", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+            self.restartGame()
+        }))
+        presentViewController(alert, animated: true, completion: nil)
     }
 }
 
@@ -144,9 +158,9 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
                         let winner = Game.sharedInstance.checkForWinner(board)
                         if (winner != nil) {
                             if (winner == Game.sharedInstance.PLAYER_1) {
-                                print("player 1 wins")
+                                displayWinnerMessage("Player 1")
                             } else {
-                                print("player 2 wins")
+                                displayWinnerMessage("Player 2")
                             }
                         }
                     }
@@ -158,9 +172,9 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
                             
                             if (winner != nil) {
                                 if (winner == Game.sharedInstance.PLAYER_1) {
-                                    print("player 1 wins")
+                                    displayWinnerMessage("Player 1")
                                 } else {
-                                    print("player 2 wins")
+                                    displayWinnerMessage("Player 2")
                                 }
                             }
                         }
@@ -173,12 +187,14 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
                     originCell.backgroundColor = Board.COLOR
                     collectionView.deselectItemAtIndexPath(self.originIndexPath!, animated: false)
                     collectionView.deselectItemAtIndexPath(destinationIndexPath, animated: false)
+                    displayIllegalMoveError()
                 }
             } else {
                 // illegal move
                 originCell.backgroundColor = Board.COLOR
                 collectionView.deselectItemAtIndexPath(self.originIndexPath!, animated: false)
                 collectionView.deselectItemAtIndexPath(destinationIndexPath, animated: false)
+                displayIllegalMoveError()
             }
         } else { // deselect the cell
             cell.backgroundColor = Board.COLOR
