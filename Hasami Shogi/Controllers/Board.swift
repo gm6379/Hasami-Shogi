@@ -95,7 +95,7 @@ public class Board: UICollectionView {
         } else {
             // search directions for capture
             for direction in directions {
-                var currentIndexPath = nextIndexPathInMoveDirection(direction, currentIndexPath: indexPath);
+                var currentIndexPath = nextIndexPathInMoveDirection(direction, currentIndexPath: indexPath)
                 if (currentIndexPath != nil) {
                     var currentCell: BoardCollectionViewCell = cellForItemAtIndexPath(currentIndexPath!) as! BoardCollectionViewCell
                     
@@ -124,7 +124,7 @@ public class Board: UICollectionView {
                             }
                         }
                     } else {
-                        while currentCell.state == oppositeState && currentIndexPath!.row != edgeOfBoard {
+                        while currentCell.state == oppositeState && currentIndexPath!.item != edgeOfBoard {
                             currentIndexPath = nextIndexPathInMoveDirection(direction, currentIndexPath: currentIndexPath!)
                             currentCell = cellForItemAtIndexPath(currentIndexPath!) as! BoardCollectionViewCell
                             if (currentCell.state == oppositeState) {
@@ -155,48 +155,95 @@ public class Board: UICollectionView {
             var numberOfFriendlyCellsArray = [Int]()
             // search directions for friendly cells
             for direction in directions {
-                var currentIndexPath = nextIndexPathInMoveDirection(direction, currentIndexPath: indexPath);
-                if (currentIndexPath != nil) {
-                    var currentCell: BoardCollectionViewCell = cellForItemAtIndexPath(currentIndexPath!) as! BoardCollectionViewCell
-                    
-                    var numberOfFriendlyCells = 0
-                    
-                    var verticalEdge: Int?
-                    var horizontalEdge: Int?
-                    if (direction == .DirectionNorth ||
-                        direction == .DirectionNorthEast ||
-                        direction == .DirectionNorthWest) {
-                            verticalEdge = 2
-                    } else if (direction == .DirectionSouth ||
-                        direction == .DirectionSouthEast ||
-                        direction == .DirectionSouthWest) {
-                        verticalEdge = 6
-                    }
-                    
-                    if (direction == .DirectionWest ||
-                        direction == .DirectionNorthWest ||
-                        direction == .DirectionSouthWest) {
-                        horizontalEdge = 2
-                    } else if (direction == .DirectionEast ||
-                        direction == .DirectionNorthEast ||
-                        direction == .DirectionSouthEast) {
-                        horizontalEdge = 6
-                    }
-                    
-                    while (currentCell.state == cell.state && currentIndexPath?.section != horizontalEdge && currentIndexPath?.row != verticalEdge) {
-                        currentIndexPath = nextIndexPathInMoveDirection(direction, currentIndexPath: currentIndexPath!)
-                        currentCell = cellForItemAtIndexPath(currentIndexPath!) as! BoardCollectionViewCell
-                        if (currentCell.state == cell.state) {
-                            numberOfFriendlyCells += 1
-                        }
-                    }
-                    
-                    numberOfFriendlyCellsArray.append(numberOfFriendlyCells)
+                var currentIndexPath: NSIndexPath?
+                currentIndexPath = NSIndexPath(forItem: indexPath.item, inSection: indexPath.section)
+                var currentCell: BoardCollectionViewCell = cellForItemAtIndexPath(currentIndexPath!) as! BoardCollectionViewCell
+                
+                var numberOfFriendlyCells = 1
+                
+                var verticalCondition: Bool?
+                var horizontalCondition: Bool?
+                
+                var verticalEdge: Int?
+                var horizontalEdge: Int?
+                if (direction == .DirectionNorth ||
+                    direction == .DirectionNorthEast ||
+                    direction == .DirectionNorthWest) {
+                    verticalEdge = 2
+                    verticalCondition = currentIndexPath?.section > verticalEdge
+                } else if (direction == .DirectionSouth ||
+                    direction == .DirectionSouthEast ||
+                    direction == .DirectionSouthWest) {
+                    verticalEdge = 6
+                    verticalCondition = currentIndexPath?.section < verticalEdge
                 }
+                
+                if (direction == .DirectionWest ||
+                    direction == .DirectionNorthWest ||
+                    direction == .DirectionSouthWest) {
+                    horizontalEdge = 0
+                    horizontalCondition = currentIndexPath?.item > horizontalEdge
+                } else if (direction == .DirectionEast ||
+                    direction == .DirectionNorthEast ||
+                    direction == .DirectionSouthEast) {
+                    horizontalEdge = 8
+                    horizontalCondition = currentIndexPath?.item < horizontalEdge
+                }
+                
+                while (currentCell.state == cell.state &&
+                      (verticalCondition == nil || verticalCondition!) &&
+                    (horizontalCondition == nil || horizontalCondition!)) {
+                    
+                    currentIndexPath = nextIndexPathInMoveDirection(direction, currentIndexPath: currentIndexPath!)
+                    currentCell = cellForItemAtIndexPath(currentIndexPath!) as! BoardCollectionViewCell
+                    if (currentCell.state == cell.state) {
+                        numberOfFriendlyCells += 1
+                    }
+                    
+                    if (verticalCondition != nil) {
+                        verticalCondition = verticalConditionInDirection(direction, currentIndexPath: currentIndexPath, verticalEdge: verticalEdge!)
+                    }
+                    
+                    if (horizontalCondition != nil) {
+                        horizontalCondition = horizontalConditionInDirection(direction, currentIndexPath: currentIndexPath, horizontalEdge: horizontalEdge!)
+                    }
+                }
+                
+                numberOfFriendlyCellsArray.append(numberOfFriendlyCells)
             }
             
             return numberOfFriendlyCellsArray
         }
+    }
+    
+    private func verticalConditionInDirection(direction: Direction, currentIndexPath: NSIndexPath?, verticalEdge: Int) -> Bool? {
+        var verticalCondition: Bool?
+        if (direction == .DirectionNorth ||
+            direction == .DirectionNorthEast ||
+            direction == .DirectionNorthWest) {
+                verticalCondition = currentIndexPath?.section > verticalEdge
+        } else if (direction == .DirectionSouth ||
+            direction == .DirectionSouthEast ||
+            direction == .DirectionSouthWest) {
+                verticalCondition = currentIndexPath?.section < verticalEdge
+        }
+        
+        return verticalCondition
+    }
+    
+    private func horizontalConditionInDirection(direction: Direction, currentIndexPath: NSIndexPath?, horizontalEdge: Int) -> Bool?  {
+        var horizontalCondition: Bool?
+        if (direction == .DirectionWest ||
+            direction == .DirectionNorthWest ||
+            direction == .DirectionSouthWest) {
+                horizontalCondition = currentIndexPath?.item > horizontalEdge
+        } else if (direction == .DirectionEast ||
+            direction == .DirectionNorthEast ||
+            direction == .DirectionSouthEast) {
+                horizontalCondition = currentIndexPath?.item < horizontalEdge
+        }
+        
+        return horizontalCondition
     }
     
     // capture the required pieces
@@ -271,7 +318,7 @@ public class Board: UICollectionView {
     
     private func moveDirectionFrom(origin: NSIndexPath, toDestinationIndexPath destination: NSIndexPath) -> Direction {
         if (origin.section == destination.section) { // a horizontal move
-            if (origin.row < destination.row) {
+            if (origin.item < destination.item) {
                 return .DirectionEast;
             } else {
                 return .DirectionWest;
@@ -297,27 +344,27 @@ public class Board: UICollectionView {
                 indexPath = NSIndexPath(forItem: current.item, inSection: current.section + 1)
             }
         case .DirectionWest:
-            if (current.row > 0) {
+            if (current.item > 0) {
                 indexPath = NSIndexPath(forItem: current.item - 1, inSection: current.section)
             }
         case .DirectionEast:
-            if (current.row < 8) {
+            if (current.item < 8) {
                 indexPath = NSIndexPath(forItem: current.item + 1, inSection: current.section)
             }
         case .DirectionNorthEast:
-            if (current.section > 0  && current.row < 8) {
+            if (current.section > 0  && current.item < 8) {
                 indexPath = NSIndexPath(forItem: current.item + 1, inSection: current.section - 1)
             }
         case .DirectionNorthWest:
-            if (current.section > 0 && current.row > 0) {
+            if (current.section > 0 && current.item > 0) {
                 indexPath = NSIndexPath(forItem: current.item - 1, inSection: current.section - 1)
             }
         case .DirectionSouthEast:
-            if (current.section < 8 && current.row < 8) {
+            if (current.section < 8 && current.item < 8) {
                 indexPath = NSIndexPath(forItem: current.item + 1, inSection: current.section + 1)
             }
         case .DirectionSouthWest:
-            if (current.section < 8 && current.row > 0) {
+            if (current.section < 8 && current.item > 0) {
                 indexPath = NSIndexPath(forItem: current.item - 1, inSection: current.section + 1)
             }
         }

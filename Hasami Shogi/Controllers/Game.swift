@@ -40,16 +40,14 @@ class Game: NSObject {
     }
     
     func checkForWinner(piecesInARow: [Int]) -> Int? {
-        for numberOfPieces in piecesInARow {
-            if (currentPlayer == PLAYER_1 && numberOfPieces == 5) {
+        if (piecesInARow.contains(5)) {
+            if (currentPlayer == PLAYER_1) {
                 return PLAYER_1
-            } else if (currentPlayer == PLAYER_2 && numberOfPieces == 5) {
-                return PLAYER_2
             } else {
-                return nil
+                return PLAYER_2
             }
         }
-        
+                
         return nil
     }
     
