@@ -49,6 +49,13 @@ class BoardViewController: UIViewController {
             player1Indicator.layer.borderColor = UIColor.clearColor().CGColor
         }
     }
+    
+    @IBAction func restartGame(sender: UIButton) {
+        board.reloadData()
+        Game.sharedInstance.currentPlayer = Game.sharedInstance.PLAYER_1
+        currentPlayer = Game.sharedInstance.currentPlayer
+        highlightCurrentPlayer()
+    }
 }
 
 extension BoardViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -67,6 +74,7 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
         cell.layer.borderColor = UIColor.blackColor().CGColor
         cell.layer.borderWidth = 1.0
         
+        board.removePieceFromCell(cell)
         if (Game.sharedInstance.style == Game.GameStyle.HasamiShogi) {
             if (indexPath.section == 0) {
                 board.drawPieceInCell(cell, withState: BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE)
@@ -143,7 +151,7 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
                         }
                     }
                     
-                    if (Game.sharedInstance.style == Game.GameStyle.DaiHasamiShogi) {
+                    if (Game.sharedInstance.style == Game.GameStyle.DaiHasamiShogi && Game.sharedInstance.fivePieceRuleEnforced) {
                         let friendlyCells = board.numberOfFriendlyCellsFromCell(destinationCell, atIndexPath: destinationIndexPath)
                         if (friendlyCells != nil) {
                             let winner = Game.sharedInstance.checkForWinner(friendlyCells!)

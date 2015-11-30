@@ -70,15 +70,25 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTH-X9-35J">
+                                <rect key="frame" x="127" y="455" width="67" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <state key="normal" title="Restart"/>
+                                <connections>
+                                    <action selector="restartGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xed-rd-Fyc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="UcN-bx-wAL" firstAttribute="trailing" secondItem="gPG-i0-Fzk" secondAttribute="trailing" id="1uR-6D-VDe"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gPG-i0-Fzk" secondAttribute="bottom" constant="227" id="2zP-6m-CER"/>
                             <constraint firstItem="eyA-Ag-hnn" firstAttribute="top" secondItem="I7d-6a-Qyf" secondAttribute="bottom" constant="5" id="4V6-cd-0gs"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="kTH-X9-35J" secondAttribute="bottom" constant="77" id="Lrf-Re-fea"/>
                             <constraint firstItem="UcN-bx-wAL" firstAttribute="top" secondItem="I7d-6a-Qyf" secondAttribute="top" id="NxB-9k-p6u"/>
                             <constraint firstItem="eyA-Ag-hnn" firstAttribute="leading" secondItem="I7d-6a-Qyf" secondAttribute="leading" id="ODy-2B-gkO"/>
                             <constraint firstItem="gPG-i0-Fzk" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="QgV-YP-NSc"/>
+                            <constraint firstItem="kTH-X9-35J" firstAttribute="centerX" secondItem="gPG-i0-Fzk" secondAttribute="centerX" id="T8Y-Bz-Tru"/>
                             <constraint firstItem="gPG-i0-Fzk" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="33" id="bry-mf-aP1"/>
                             <constraint firstItem="I7d-6a-Qyf" firstAttribute="leading" secondItem="gPG-i0-Fzk" secondAttribute="leading" id="eYA-PV-ecj"/>
                             <constraint firstItem="UcN-bx-wAL" firstAttribute="width" secondItem="I7d-6a-Qyf" secondAttribute="width" id="eom-5C-Wkc"/>

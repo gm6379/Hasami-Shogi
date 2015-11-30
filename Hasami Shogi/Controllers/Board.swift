@@ -48,7 +48,7 @@ public class Board: UICollectionView {
         cell.pieceView = piece
     }
     
-    private func removePieceFromCell(cell: BoardCollectionViewCell) {
+    public func removePieceFromCell(cell: BoardCollectionViewCell) {
         cell.pieceView?.removeFromSuperview()
         cell.state = BoardCollectionViewCell.BOARD_CELL_STATE_EMPTY
         cell.backgroundColor = Board.COLOR
