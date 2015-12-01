@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A94E1EF61C0DBED100D3D539 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94E1EF51C0DBED100D3D539 /* HomeViewController.swift */; };
+		A952311B1C0E2AFB00B09F20 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A952311A1C0E2AFB00B09F20 /* CoreDataController.swift */; };
+		A952311D1C0E3DF600B09F20 /* LeagueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A952311C1C0E3DF600B09F20 /* LeagueTableViewController.swift */; };
 		A95B10F71BB9C7CF00AB03A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B10F61BB9C7CF00AB03A0 /* AppDelegate.swift */; };
 		A95B10F91BB9C7CF00AB03A0 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B10F81BB9C7CF00AB03A0 /* BoardViewController.swift */; };
 		A95B10FC1BB9C7CF00AB03A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A95B10FA1BB9C7CF00AB03A0 /* Main.storyboard */; };
@@ -46,6 +48,8 @@
 
 /* Begin PBXFileReference section */
 		A94E1EF51C0DBED100D3D539 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		A952311A1C0E2AFB00B09F20 /* CoreDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		A952311C1C0E3DF600B09F20 /* LeagueTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeagueTableViewController.swift; sourceTree = "<group>"; };
 		A95B10F31BB9C7CF00AB03A0 /* Hasami Shogi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hasami Shogi.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A95B10F61BB9C7CF00AB03A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A95B10F81BB9C7CF00AB03A0 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +165,8 @@
 				A973CCEA1C0CC329002868DB /* RegisterViewController.swift */,
 				A94E1EF51C0DBED100D3D539 /* HomeViewController.swift */,
 				A95CDBE41C0DF73C000CEFD1 /* PlayerSelectionTableViewController.swift */,
+				A952311A1C0E2AFB00B09F20 /* CoreDataController.swift */,
+				A952311C1C0E3DF600B09F20 /* LeagueTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -323,7 +329,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A95CDBE91C0E0E07000CEFD1 /* Player.swift in Sources */,
+				A952311D1C0E3DF600B09F20 /* LeagueTableViewController.swift in Sources */,
 				A95B10F91BB9C7CF00AB03A0 /* BoardViewController.swift in Sources */,
+				A952311B1C0E2AFB00B09F20 /* CoreDataController.swift in Sources */,
 				A9B7669B1BC3FFAF00E74CAC /* Game.swift in Sources */,
 				A95B10F71BB9C7CF00AB03A0 /* AppDelegate.swift in Sources */,
 				A973CCEB1C0CC329002868DB /* RegisterViewController.swift in Sources */,

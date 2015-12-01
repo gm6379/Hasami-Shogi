@@ -75,17 +75,16 @@ class RegisterViewController: UIViewController, CNContactPickerDelegate, UITextV
     }
     
     @IBAction func completeRegistration(sender: UIButton) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let player: Player = NSEntityDescription.insertNewObjectForEntityForName("Player", inManagedObjectContext: appDelegate.managedObjectContext) as! Player
-        player.forename = playerForename
-        player.surname = playerSurname
-        
+        let dataController = CoreDataController()
+        var pDescription: String?
         if (playerShortDescriptionTextView.text != "Enter a short description here...") {
-            player.pDescription = playerShortDescriptionTextView.text
+            pDescription = playerShortDescriptionTextView.text
         }
         
-        player.avatar = UIImagePNGRepresentation(playerImageView.image!)
-        appDelegate.saveContext()
+        let avatar = UIImagePNGRepresentation(playerImageView.image!)
+        
+        dataController.createPlayer(playerForename!, playerSurname: playerSurname!, playerDescription: pDescription, playerAvatar: avatar!)
+        dismissViewControllerAnimated(false, completion: nil)
     }
     
     @IBAction func cancelRegistration(sender: UIButton) {

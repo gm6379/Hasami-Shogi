@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol BoardViewControllerDelgate {
+    func willDismiss()
+}
+
 class BoardViewController: UIViewController {
     
     @IBOutlet weak var player1Indicator: BoardCollectionViewCell!
@@ -19,6 +23,12 @@ class BoardViewController: UIViewController {
     
     var player1: String?
     var player2: String?
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBarHidden = true
+    }
+    
+    var delegate: BoardViewControllerDelgate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,8 +89,8 @@ class BoardViewController: UIViewController {
         presentViewController(alert, animated: true, completion: nil)
     }
     
-    
     @IBAction func home(sender: UIButton) {
+        delegate?.willDismiss()
         dismissViewControllerAnimated(false, completion: nil)
     }
     

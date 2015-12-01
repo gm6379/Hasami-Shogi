@@ -13,17 +13,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="PiD-uF-5rg">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PiD-uF-5rg" id="yAc-MO-3lZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="STd-mX-B7U" id="zNO-8A-P1Q"/>
                             <outlet property="delegate" destination="STd-mX-B7U" id="8rD-9r-Wcw"/>
@@ -245,7 +234,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lhv-vI-f4R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="727" y="474"/>
+            <point key="canvasLocation" x="-421" y="1169"/>
+        </scene>
+        <!--League Table-->
+        <scene sceneID="3Z8-aY-s8n">
+            <objects>
+                <tableViewController title="League Table" id="O6u-F9-uSk" customClass="LeagueTableViewController" customModule="Hasami_Shogi" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="z5l-On-Wxd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="O6u-F9-uSk" id="brg-bN-sFk"/>
+                            <outlet property="delegate" destination="O6u-F9-uSk" id="p7W-WK-vhB"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="yGt-YB-k0K"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ofI-Vw-CGh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="358" y="1164"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="CFh-xR-iJd">
@@ -289,7 +297,6 @@
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <state key="normal" title="Start a new Game"/>
                                 <connections>
-                                    <action selector="newGame:" destination="QXy-Um-Uab" eventType="touchUpInside" id="jGZ-na-DMj"/>
                                     <segue destination="STd-mX-B7U" kind="push" id="OOi-zb-svt"/>
                                 </connections>
                             </button>
@@ -310,17 +317,28 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lOW-Jh-SZ0">
+                                <rect key="frame" x="12" y="418" width="296" height="33"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <state key="normal" title="League Table"/>
+                                <connections>
+                                    <segue destination="O6u-F9-uSk" kind="push" id="6Me-03-eQI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="lOW-Jh-SZ0" firstAttribute="trailing" secondItem="o50-ua-qgb" secondAttribute="trailing" id="99V-ky-Fcq"/>
                             <constraint firstItem="nf1-Gw-OdD" firstAttribute="leading" secondItem="5tf-Kn-590" secondAttribute="leadingMargin" constant="-4" id="CMo-1V-9c8"/>
                             <constraint firstItem="o50-ua-qgb" firstAttribute="trailing" secondItem="nf1-Gw-OdD" secondAttribute="trailing" id="Cxk-dA-YnT"/>
                             <constraint firstItem="f2n-HM-THo" firstAttribute="centerX" secondItem="nf1-Gw-OdD" secondAttribute="centerX" id="HkE-7z-Fmg"/>
                             <constraint firstItem="o50-ua-qgb" firstAttribute="centerX" secondItem="5tf-Kn-590" secondAttribute="centerX" id="Kd1-Hg-eXR"/>
                             <constraint firstItem="Mbz-MY-TC5" firstAttribute="top" secondItem="mDV-MF-S6e" secondAttribute="bottom" constant="148" id="Ltn-ij-x6F"/>
+                            <constraint firstItem="lOW-Jh-SZ0" firstAttribute="top" secondItem="o50-ua-qgb" secondAttribute="bottom" constant="18" id="O4E-mT-vTy"/>
                             <constraint firstItem="o50-ua-qgb" firstAttribute="leading" secondItem="nf1-Gw-OdD" secondAttribute="leading" id="Rex-c1-ujV"/>
                             <constraint firstItem="f2n-HM-THo" firstAttribute="leading" secondItem="Mbz-MY-TC5" secondAttribute="leading" id="Rwq-RG-uMl"/>
                             <constraint firstItem="o50-ua-qgb" firstAttribute="top" secondItem="nf1-Gw-OdD" secondAttribute="bottom" constant="18" id="WUj-Vl-2kt"/>
+                            <constraint firstItem="lOW-Jh-SZ0" firstAttribute="leading" secondItem="o50-ua-qgb" secondAttribute="leading" id="cf4-6u-Mhh"/>
                             <constraint firstItem="Mbz-MY-TC5" firstAttribute="trailing" secondItem="f2n-HM-THo" secondAttribute="trailing" id="dh7-TO-fpr"/>
                             <constraint firstItem="nf1-Gw-OdD" firstAttribute="top" secondItem="f2n-HM-THo" secondAttribute="bottom" constant="91" id="ebo-y5-xA6"/>
                             <constraint firstItem="f2n-HM-THo" firstAttribute="top" secondItem="Mbz-MY-TC5" secondAttribute="bottom" constant="9" id="gFZ-fC-9Uk"/>
@@ -331,6 +349,67 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5i9-5T-gGD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-421" y="474"/>
+        </scene>
+        <!--Player Detail View Controller-->
+        <scene sceneID="P7V-zu-BI1">
+            <objects>
+                <viewController storyboardIdentifier="PlayerDetailViewController" id="JnB-TJ-8B9" customClass="PlayerDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="O2S-Y7-zak"/>
+                        <viewControllerLayoutGuide type="bottom" id="hRa-Bt-LXf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FEB-JT-i4g">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user7" translatesAutoresizingMaskIntoConstraints="NO" id="MZQ-pr-kt2">
+                                <rect key="frame" x="15" y="53" width="71" height="67"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="71" id="Jj6-hi-7qA"/>
+                                </constraints>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" text="Enter a short description here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JLm-pg-vni">
+                                <rect key="frame" x="15" y="171" width="290" height="179"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="JnB-TJ-8B9" id="tLg-Jq-wgm"/>
+                                </connections>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7OR-h5-xZB">
+                                <rect key="frame" x="94" y="76" width="211" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="wh0-fU-BhZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="MZQ-pr-kt2" firstAttribute="leading" secondItem="JLm-pg-vni" secondAttribute="leading" id="1SX-vU-sFQ"/>
+                            <constraint firstItem="JLm-pg-vni" firstAttribute="top" secondItem="7OR-h5-xZB" secondAttribute="bottom" constant="74" id="3Ow-2R-rgH"/>
+                            <constraint firstItem="hRa-Bt-LXf" firstAttribute="top" secondItem="JLm-pg-vni" secondAttribute="bottom" constant="218" id="4ll-r9-fed"/>
+                            <constraint firstItem="JLm-pg-vni" firstAttribute="trailing" secondItem="7OR-h5-xZB" secondAttribute="trailing" id="Fao-oP-qhk"/>
+                            <constraint firstItem="MZQ-pr-kt2" firstAttribute="leading" secondItem="FEB-JT-i4g" secondAttribute="leadingMargin" constant="-1" id="Hol-Pe-4Ez"/>
+                            <constraint firstItem="JLm-pg-vni" firstAttribute="centerX" secondItem="FEB-JT-i4g" secondAttribute="centerX" id="Vsy-RM-CRV"/>
+                            <constraint firstItem="JLm-pg-vni" firstAttribute="top" secondItem="MZQ-pr-kt2" secondAttribute="bottom" constant="51" id="XKm-bi-Izs"/>
+                            <constraint firstItem="MZQ-pr-kt2" firstAttribute="top" secondItem="O2S-Y7-zak" secondAttribute="bottom" constant="33" id="Zkk-vK-7ae"/>
+                            <constraint firstItem="7OR-h5-xZB" firstAttribute="leading" secondItem="MZQ-pr-kt2" secondAttribute="trailing" constant="8" symbolic="YES" id="fPE-H8-26s"/>
+                            <constraint firstItem="MZQ-pr-kt2" firstAttribute="top" secondItem="7OR-h5-xZB" secondAttribute="top" constant="-23" id="jQt-Rf-p0t"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="playerImageView" destination="MZQ-pr-kt2" id="PiP-pw-gmo"/>
+                        <outlet property="playerNameLabel" destination="7OR-h5-xZB" id="jZE-EG-MUd"/>
+                        <outlet property="playerShortDescriptionTextView" destination="JLm-pg-vni" id="HYN-wU-XAz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KgM-oH-eMv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="747" y="1164"/>
         </scene>
     </scenes>
     <resources>
