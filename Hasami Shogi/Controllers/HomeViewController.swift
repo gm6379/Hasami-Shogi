@@ -10,15 +10,18 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBarHidden = true
+    }
     
     @IBAction func newGame(sender: UIButton) {
         let boardViewController = storyboard?.instantiateViewControllerWithIdentifier("BoardViewController")
-        presentViewController(boardViewController!, animated: true, completion: nil)
+        //presentViewController(boardViewController!, animated: false, completion: nil)
     }
     
     
     @IBAction func register(sender: UIButton) {
         let registerViewController = storyboard?.instantiateViewControllerWithIdentifier("RegisterViewController")
-        presentViewController(registerViewController!, animated: true, completion: nil)
+        presentViewController(registerViewController!, animated: false, completion: nil)
     }
 }

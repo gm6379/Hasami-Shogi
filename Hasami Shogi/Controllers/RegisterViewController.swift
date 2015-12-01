@@ -19,6 +19,8 @@ class RegisterViewController: UIViewController, CNContactPickerDelegate, UITextV
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     
+    var playerForename: String?
+    var playerSurname: String?
     
     let contactPicker = CNContactPickerViewController()
     var shownPicker = false
@@ -37,18 +39,21 @@ class RegisterViewController: UIViewController, CNContactPickerDelegate, UITextV
     }
     
     func contactPicker(picker: CNContactPickerViewController, didSelectContact contact: CNContact) {
-        contactPicker.dismissViewControllerAnimated(true) { () -> Void in
+        contactPicker.dismissViewControllerAnimated(false) { () -> Void in
         
             UIView.animateWithDuration(0.5, animations: { () -> Void in
                 if (contact.imageData != nil) {
                     self.playerImageView.image = UIImage(data: contact.imageData!)
                 }
+                
                 self.playerImageView.alpha = 1
-                self.playerNameLabel.text = contact.givenName + " " + contact.familyName
+                self.playerForename = contact.givenName
+                self.playerSurname = contact.familyName
+                self.playerNameLabel.text = self.playerForename! + " " + self.playerSurname!
                 self.playerNameLabel.alpha = 1
                 self.playerShortDescriptionTextView.alpha = 1
                 self.registerButton.alpha = 1
-                
+                self.cancelButton.alpha = 1
             })
         }
     }
@@ -72,20 +77,19 @@ class RegisterViewController: UIViewController, CNContactPickerDelegate, UITextV
     @IBAction func completeRegistration(sender: UIButton) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let player: Player = NSEntityDescription.insertNewObjectForEntityForName("Player", inManagedObjectContext: appDelegate.managedObjectContext) as! Player
-        player.name = playerNameLabel.text
+        player.forename = playerForename
+        player.surname = playerSurname
         
         if (playerShortDescriptionTextView.text != "Enter a short description here...") {
             player.pDescription = playerShortDescriptionTextView.text
         }
         
         player.avatar = UIImagePNGRepresentation(playerImageView.image!)
-        
         appDelegate.saveContext()
     }
     
     @IBAction func cancelRegistration(sender: UIButton) {
-        
+        dismissViewControllerAnimated(false, completion: nil)
     }
-    
     
 }

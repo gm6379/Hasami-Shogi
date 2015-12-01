@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A94E1EF61C0DBED100D3D539 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94E1EF51C0DBED100D3D539 /* HomeViewController.swift */; };
-		A94E1EF91C0DD01C00D3D539 /* Player+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94E1EF71C0DD01C00D3D539 /* Player+CoreDataProperties.swift */; };
-		A94E1EFA1C0DD01C00D3D539 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94E1EF81C0DD01C00D3D539 /* Player.swift */; };
 		A95B10F71BB9C7CF00AB03A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B10F61BB9C7CF00AB03A0 /* AppDelegate.swift */; };
 		A95B10F91BB9C7CF00AB03A0 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B10F81BB9C7CF00AB03A0 /* BoardViewController.swift */; };
 		A95B10FC1BB9C7CF00AB03A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A95B10FA1BB9C7CF00AB03A0 /* Main.storyboard */; };
@@ -18,6 +16,9 @@
 		A95B11041BB9C7CF00AB03A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A95B11021BB9C7CF00AB03A0 /* LaunchScreen.storyboard */; };
 		A95B110F1BB9C7CF00AB03A0 /* Hasami_ShogiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B110E1BB9C7CF00AB03A0 /* Hasami_ShogiTests.swift */; };
 		A95B111A1BB9C7CF00AB03A0 /* Hasami_ShogiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B11191BB9C7CF00AB03A0 /* Hasami_ShogiUITests.swift */; };
+		A95CDBE51C0DF73C000CEFD1 /* PlayerSelectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CDBE41C0DF73C000CEFD1 /* PlayerSelectionTableViewController.swift */; };
+		A95CDBE81C0E0E07000CEFD1 /* Player+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CDBE61C0E0E07000CEFD1 /* Player+CoreDataProperties.swift */; };
+		A95CDBE91C0E0E07000CEFD1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95CDBE71C0E0E07000CEFD1 /* Player.swift */; };
 		A973CCE71C0CC23E002868DB /* ContactsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A973CCE61C0CC23E002868DB /* ContactsUI.framework */; };
 		A973CCE91C0CC2D4002868DB /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A973CCE81C0CC2D4002868DB /* Contacts.framework */; };
 		A973CCEB1C0CC329002868DB /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A973CCEA1C0CC329002868DB /* RegisterViewController.swift */; };
@@ -45,8 +46,6 @@
 
 /* Begin PBXFileReference section */
 		A94E1EF51C0DBED100D3D539 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		A94E1EF71C0DD01C00D3D539 /* Player+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Player+CoreDataProperties.swift"; path = "../../Player+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A94E1EF81C0DD01C00D3D539 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = ../../Player.swift; sourceTree = "<group>"; };
 		A95B10F31BB9C7CF00AB03A0 /* Hasami Shogi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hasami Shogi.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A95B10F61BB9C7CF00AB03A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A95B10F81BB9C7CF00AB03A0 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +60,9 @@
 		A95B11151BB9C7CF00AB03A0 /* Hasami ShogiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Hasami ShogiUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A95B11191BB9C7CF00AB03A0 /* Hasami_ShogiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hasami_ShogiUITests.swift; sourceTree = "<group>"; };
 		A95B111B1BB9C7CF00AB03A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A95CDBE41C0DF73C000CEFD1 /* PlayerSelectionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerSelectionTableViewController.swift; sourceTree = "<group>"; };
+		A95CDBE61C0E0E07000CEFD1 /* Player+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Player+CoreDataProperties.swift"; path = "../../Player+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A95CDBE71C0E0E07000CEFD1 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = ../../Player.swift; sourceTree = "<group>"; };
 		A973CCE61C0CC23E002868DB /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		A973CCE81C0CC2D4002868DB /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		A973CCEA1C0CC329002868DB /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -130,7 +132,6 @@
 				A95B11001BB9C7CF00AB03A0 /* Assets.xcassets */,
 				A95B11021BB9C7CF00AB03A0 /* LaunchScreen.storyboard */,
 				A95B11051BB9C7CF00AB03A0 /* Info.plist */,
-				A95B10FD1BB9C7CF00AB03A0 /* Hasami_Shogi.xcdatamodeld */,
 			);
 			path = "Hasami Shogi";
 			sourceTree = "<group>";
@@ -159,6 +160,7 @@
 				A95B10F81BB9C7CF00AB03A0 /* BoardViewController.swift */,
 				A973CCEA1C0CC329002868DB /* RegisterViewController.swift */,
 				A94E1EF51C0DBED100D3D539 /* HomeViewController.swift */,
+				A95CDBE41C0DF73C000CEFD1 /* PlayerSelectionTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -174,8 +176,9 @@
 		A95B11291BB9C8AF00AB03A0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A94E1EF71C0DD01C00D3D539 /* Player+CoreDataProperties.swift */,
-				A94E1EF81C0DD01C00D3D539 /* Player.swift */,
+				A95CDBE61C0E0E07000CEFD1 /* Player+CoreDataProperties.swift */,
+				A95CDBE71C0E0E07000CEFD1 /* Player.swift */,
+				A95B10FD1BB9C7CF00AB03A0 /* Hasami_Shogi.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -319,15 +322,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A95CDBE91C0E0E07000CEFD1 /* Player.swift in Sources */,
 				A95B10F91BB9C7CF00AB03A0 /* BoardViewController.swift in Sources */,
 				A9B7669B1BC3FFAF00E74CAC /* Game.swift in Sources */,
-				A94E1EF91C0DD01C00D3D539 /* Player+CoreDataProperties.swift in Sources */,
 				A95B10F71BB9C7CF00AB03A0 /* AppDelegate.swift in Sources */,
 				A973CCEB1C0CC329002868DB /* RegisterViewController.swift in Sources */,
 				A94E1EF61C0DBED100D3D539 /* HomeViewController.swift in Sources */,
 				A9B766991BC3EABD00E74CAC /* Board.swift in Sources */,
+				A95CDBE81C0E0E07000CEFD1 /* Player+CoreDataProperties.swift in Sources */,
 				A95B10FF1BB9C7CF00AB03A0 /* Hasami_Shogi.xcdatamodeld in Sources */,
-				A94E1EFA1C0DD01C00D3D539 /* Player.swift in Sources */,
+				A95CDBE51C0DF73C000CEFD1 /* PlayerSelectionTableViewController.swift in Sources */,
 				A9B7669F1BC40CB100E74CAC /* BoardCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -592,7 +596,8 @@
 				A95B10FE1BB9C7CF00AB03A0 /* Hasami_Shogi.xcdatamodel */,
 			);
 			currentVersion = A95B10FE1BB9C7CF00AB03A0 /* Hasami_Shogi.xcdatamodel */;
-			path = Hasami_Shogi.xcdatamodeld;
+			name = Hasami_Shogi.xcdatamodeld;
+			path = ../Hasami_Shogi.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

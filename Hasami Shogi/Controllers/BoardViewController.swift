@@ -11,13 +11,21 @@ import UIKit
 class BoardViewController: UIViewController {
     
     @IBOutlet weak var player1Indicator: BoardCollectionViewCell!
+    @IBOutlet weak var player1NameLabel: UILabel!
+    @IBOutlet weak var player2NameLabel: UILabel!
     @IBOutlet weak var player2Indicator: BoardCollectionViewCell!
     @IBOutlet weak var board: Board!
     var currentPlayer: Int = Game.sharedInstance.currentPlayer
+    
+    var player1: String?
+    var player2: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        player1NameLabel.text = player1
+        player2NameLabel.text = player2
         
         board.drawPieceInCell(player1Indicator, withState: BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE)
         player1Indicator.layer.borderWidth = 1.0
@@ -70,6 +78,12 @@ class BoardViewController: UIViewController {
         }))
         presentViewController(alert, animated: true, completion: nil)
     }
+    
+    
+    @IBAction func home(sender: UIButton) {
+        dismissViewControllerAnimated(false, completion: nil)
+    }
+    
 }
 
 extension BoardViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
