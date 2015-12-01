@@ -19,6 +19,9 @@ class LeagueTableViewController: UITableViewController {
         registeredPlayers = dataController.fetchPlayers()
         self.navigationController?.navigationBarHidden = false
         self.title = "League Table"
+        
+        let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: "dismiss")
+        navigationItem.leftBarButtonItem = backButton
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -38,6 +41,16 @@ class LeagueTableViewController: UITableViewController {
         cell.detailTextLabel?.text = player.score?.stringValue
 
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let playerDetailViewController = storyboard?.instantiateViewControllerWithIdentifier("PlayerDetailViewController") as! PlayerDetailViewController
+        playerDetailViewController.player = registeredPlayers[indexPath.row]
+        showViewController(playerDetailViewController, sender: self)
+    }
+    
+    @IBAction func dismiss() {
+        dismissViewControllerAnimated(false, completion: nil)
     }
     
 }

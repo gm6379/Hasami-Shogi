@@ -98,9 +98,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YSA-WH-9pk">
-                                <rect key="frame" x="208" y="34" width="100" height="33"/>
+                                <rect key="frame" x="204" y="34" width="104" height="33"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                <state key="normal" title="Leaderboard"/>
+                                <state key="normal" title="League Table"/>
+                                <connections>
+                                    <action selector="leagueTable:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ueH-Vz-k0a"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZN5-cI-Fx8">
                                 <rect key="frame" x="12" y="34" width="47" height="33"/>
@@ -146,7 +149,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="351" y="474"/>
+            <point key="canvasLocation" x="358" y="474"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="HZl-in-aSY">
@@ -239,7 +242,7 @@
         <!--League Table-->
         <scene sceneID="3Z8-aY-s8n">
             <objects>
-                <tableViewController title="League Table" id="O6u-F9-uSk" customClass="LeagueTableViewController" customModule="Hasami_Shogi" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="LeagueTableViewController" title="League Table" id="O6u-F9-uSk" customClass="LeagueTableViewController" customModule="Hasami_Shogi" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="z5l-On-Wxd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -253,7 +256,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ofI-Vw-CGh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="358" y="1164"/>
+            <point key="canvasLocation" x="890" y="1164"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="CFh-xR-iJd">
@@ -269,7 +272,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bp9-wK-f0a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-941" y="483"/>
+            <point key="canvasLocation" x="-941" y="474"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="TJZ-tJ-bRc">
@@ -322,7 +325,7 @@
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <state key="normal" title="League Table"/>
                                 <connections>
-                                    <segue destination="O6u-F9-uSk" kind="push" id="6Me-03-eQI"/>
+                                    <action selector="leagueTable:" destination="QXy-Um-Uab" eventType="touchUpInside" id="7WQ-ZR-R3P"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -353,7 +356,7 @@
         <!--Player Detail View Controller-->
         <scene sceneID="P7V-zu-BI1">
             <objects>
-                <viewController storyboardIdentifier="PlayerDetailViewController" id="JnB-TJ-8B9" customClass="PlayerDetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlayerDetailViewController" id="JnB-TJ-8B9" customClass="PlayerDetailViewController" customModule="Hasami_Shogi" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="O2S-Y7-zak"/>
                         <viewControllerLayoutGuide type="bottom" id="hRa-Bt-LXf"/>
@@ -362,14 +365,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user7" translatesAutoresizingMaskIntoConstraints="NO" id="MZQ-pr-kt2">
-                                <rect key="frame" x="15" y="53" width="71" height="67"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user7" translatesAutoresizingMaskIntoConstraints="NO" id="MZQ-pr-kt2">
+                                <rect key="frame" x="11" y="78" width="71" height="67"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="71" id="Jj6-hi-7qA"/>
                                 </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="scaleToFill" text="Enter a short description here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JLm-pg-vni">
-                                <rect key="frame" x="15" y="171" width="290" height="179"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Enter a short description here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JLm-pg-vni">
+                                <rect key="frame" x="11" y="196" width="298" height="179"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -377,8 +380,8 @@
                                     <outlet property="delegate" destination="JnB-TJ-8B9" id="tLg-Jq-wgm"/>
                                 </connections>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7OR-h5-xZB">
-                                <rect key="frame" x="94" y="76" width="211" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7OR-h5-xZB">
+                                <rect key="frame" x="90" y="101" width="219" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="wh0-fU-BhZ"/>
                                 </constraints>
@@ -391,25 +394,44 @@
                         <constraints>
                             <constraint firstItem="MZQ-pr-kt2" firstAttribute="leading" secondItem="JLm-pg-vni" secondAttribute="leading" id="1SX-vU-sFQ"/>
                             <constraint firstItem="JLm-pg-vni" firstAttribute="top" secondItem="7OR-h5-xZB" secondAttribute="bottom" constant="74" id="3Ow-2R-rgH"/>
-                            <constraint firstItem="hRa-Bt-LXf" firstAttribute="top" secondItem="JLm-pg-vni" secondAttribute="bottom" constant="218" id="4ll-r9-fed"/>
+                            <constraint firstItem="hRa-Bt-LXf" firstAttribute="top" secondItem="JLm-pg-vni" secondAttribute="bottom" constant="193" id="4ll-r9-fed"/>
                             <constraint firstItem="JLm-pg-vni" firstAttribute="trailing" secondItem="7OR-h5-xZB" secondAttribute="trailing" id="Fao-oP-qhk"/>
-                            <constraint firstItem="MZQ-pr-kt2" firstAttribute="leading" secondItem="FEB-JT-i4g" secondAttribute="leadingMargin" constant="-1" id="Hol-Pe-4Ez"/>
+                            <constraint firstItem="MZQ-pr-kt2" firstAttribute="leading" secondItem="FEB-JT-i4g" secondAttribute="leadingMargin" constant="-5" id="Hol-Pe-4Ez"/>
                             <constraint firstItem="JLm-pg-vni" firstAttribute="centerX" secondItem="FEB-JT-i4g" secondAttribute="centerX" id="Vsy-RM-CRV"/>
                             <constraint firstItem="JLm-pg-vni" firstAttribute="top" secondItem="MZQ-pr-kt2" secondAttribute="bottom" constant="51" id="XKm-bi-Izs"/>
-                            <constraint firstItem="MZQ-pr-kt2" firstAttribute="top" secondItem="O2S-Y7-zak" secondAttribute="bottom" constant="33" id="Zkk-vK-7ae"/>
+                            <constraint firstItem="MZQ-pr-kt2" firstAttribute="top" secondItem="O2S-Y7-zak" secondAttribute="bottom" constant="58" id="Zkk-vK-7ae"/>
                             <constraint firstItem="7OR-h5-xZB" firstAttribute="leading" secondItem="MZQ-pr-kt2" secondAttribute="trailing" constant="8" symbolic="YES" id="fPE-H8-26s"/>
                             <constraint firstItem="MZQ-pr-kt2" firstAttribute="top" secondItem="7OR-h5-xZB" secondAttribute="top" constant="-23" id="jQt-Rf-p0t"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="playerImageView" destination="MZQ-pr-kt2" id="PiP-pw-gmo"/>
-                        <outlet property="playerNameLabel" destination="7OR-h5-xZB" id="jZE-EG-MUd"/>
-                        <outlet property="playerShortDescriptionTextView" destination="JLm-pg-vni" id="HYN-wU-XAz"/>
+                        <outlet property="avatarImageView" destination="MZQ-pr-kt2" id="ZuL-fL-q9n"/>
+                        <outlet property="descriptionTextView" destination="JLm-pg-vni" id="8Y9-V1-K31"/>
+                        <outlet property="nameLabel" destination="7OR-h5-xZB" id="SpE-ed-5mt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KgM-oH-eMv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="747" y="1164"/>
+            <point key="canvasLocation" x="1279" y="1164"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dPp-Ka-aS2">
+            <objects>
+                <navigationController storyboardIdentifier="LeagueTableNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Wdm-Kz-Na4" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="es4-SR-f7l"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Bdd-ov-hHh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="O6u-F9-uSk" kind="relationship" relationship="rootViewController" id="a7L-YK-rO3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IRQ-Em-1XV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="358" y="1164"/>
         </scene>
     </scenes>
     <resources>

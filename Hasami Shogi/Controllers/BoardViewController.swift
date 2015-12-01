@@ -94,6 +94,12 @@ class BoardViewController: UIViewController {
         dismissViewControllerAnimated(false, completion: nil)
     }
     
+    @IBAction func leagueTable(sender: AnyObject) {
+        let leagueTableViewController = storyboard?.instantiateViewControllerWithIdentifier("LeagueTableNavigationController") as! UINavigationController
+        
+        presentViewController(leagueTableViewController, animated: false, completion: nil)
+    }
+    
 }
 
 extension BoardViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {

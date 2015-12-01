@@ -19,5 +19,10 @@ class HomeViewController: UIViewController {
         presentViewController(registerViewController!, animated: false, completion: nil)
     }
     
+    @IBAction func leagueTable(sender: UIButton) {
+        let leagueTableViewController = storyboard?.instantiateViewControllerWithIdentifier("LeagueTableNavigationController") as! UINavigationController
+        
+        presentViewController(leagueTableViewController, animated: false, completion: nil)
+    }
     
 }
