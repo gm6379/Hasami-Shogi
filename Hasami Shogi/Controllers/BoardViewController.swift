@@ -50,7 +50,7 @@ class BoardViewController: UIViewController {
         }
     }
     
-    private func restartGame() {
+    @IBAction func restartGame() {
         board.reloadData()
         Game.sharedInstance.currentPlayer = Game.sharedInstance.PLAYER_1
         currentPlayer = Game.sharedInstance.currentPlayer

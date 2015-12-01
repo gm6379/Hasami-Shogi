@@ -2,7 +2,7 @@
 //  Player.swift
 //  Hasami Shogi
 //
-//  Created by George McDonnell on 30/11/2015.
+//  Created by George McDonnell on 01/12/2015.
 //  Copyright © 2015 George McDonnell. All rights reserved.
 //
 

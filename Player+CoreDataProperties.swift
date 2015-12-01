@@ -2,7 +2,7 @@
 //  Player+CoreDataProperties.swift
 //  Hasami Shogi
 //
-//  Created by George McDonnell on 30/11/2015.
+//  Created by George McDonnell on 01/12/2015.
 //  Copyright © 2015 George McDonnell. All rights reserved.
 //
 
@@ -13,7 +13,7 @@ extension Player {
 
     @NSManaged var avatar: NSData?
     @NSManaged var name: String?
+    @NSManaged var score: NSNumber?
     @NSManaged var pDescription: String?
-    @NSManaged var numberOfWins: NSNumber?
 
 }
