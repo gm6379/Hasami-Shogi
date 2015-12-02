@@ -58,6 +58,11 @@ class RegisterViewController: UIViewController, CNContactPickerDelegate, UITextV
         }
     }
     
+    func contactPickerDidCancel(picker: CNContactPickerViewController) {
+        picker.dismissViewControllerAnimated(false, completion: nil)
+        dismissViewControllerAnimated(false, completion: nil)
+    }
+    
     func dismissKeyboard() {
         playerShortDescriptionTextView.resignFirstResponder()
     }
