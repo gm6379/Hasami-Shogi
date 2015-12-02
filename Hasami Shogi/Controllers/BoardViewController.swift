@@ -12,7 +12,7 @@ protocol BoardViewControllerDelgate {
     func willDismiss()
 }
 
-class BoardViewController: UIViewController {
+class BoardViewController: UIViewController, SettingsViewControllerDelegate {
     
     @IBOutlet weak var player1Indicator: BoardCollectionViewCell!
     @IBOutlet weak var player1NameLabel: UILabel!
@@ -22,7 +22,17 @@ class BoardViewController: UIViewController {
     var currentPlayer: Int = Game.sharedInstance.currentPlayer
     
     var player1: String?
+    var player1IsRegistered: Bool?
     var player2: String?
+    var player2IsRegistered: Bool?
+    
+    let dataController = CoreDataController()
+    
+    var gameHasBegun = false
+    
+    var numPiecesToWin: Int?
+    var numStartPieces: Int?
+    var fivePieceRule: Bool?
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
@@ -34,8 +44,8 @@ class BoardViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        player1NameLabel.text = player1
-        player2NameLabel.text = player2
+        player1NameLabel.text = player1?.componentsSeparatedByString(" ")[0]
+        player2NameLabel.text = player2?.componentsSeparatedByString(" ")[0]
         
         board.drawPieceInCell(player1Indicator, withState: BoardCollectionViewCell.BOARD_CELL_STATE_WHITE_PIECE)
         player1Indicator.layer.borderWidth = 1.0
@@ -69,10 +79,16 @@ class BoardViewController: UIViewController {
     }
     
     @IBAction func restartGame() {
+        if (numPiecesToWin != nil && numStartPieces != nil && fivePieceRule != nil) {
+            Game.sharedInstance.style = numStartPieces == 9 ? Game.GameStyle.HasamiShogi : Game.GameStyle.DaiHasamiShogi
+            Game.sharedInstance.numberOfCapturedPiecesToWin = numPiecesToWin!
+            Game.sharedInstance.fivePieceRuleEnforced = fivePieceRule!
+        }
         board.reloadData()
         Game.sharedInstance.currentPlayer = Game.sharedInstance.PLAYER_1
         currentPlayer = Game.sharedInstance.currentPlayer
         highlightCurrentPlayer()
+        gameHasBegun = false
     }
     
     private func displayIllegalMoveError() {
@@ -83,13 +99,20 @@ class BoardViewController: UIViewController {
     
     private func displayWinnerMessage(winner: String) {
         let alert = UIAlertController(title: "Winner!", message: "The winner was " + winner, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Restart", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+        alert.addAction(UIAlertAction(title: "New Game", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
             self.restartGame()
         }))
         presentViewController(alert, animated: true, completion: nil)
     }
     
     @IBAction func home(sender: UIButton) {
+        if (numPiecesToWin != nil && numStartPieces != nil && fivePieceRule != nil) {
+            Game.sharedInstance.style = numStartPieces == 9 ? Game.GameStyle.HasamiShogi : Game.GameStyle.DaiHasamiShogi
+            Game.sharedInstance.numberOfCapturedPiecesToWin = numPiecesToWin!
+            Game.sharedInstance.fivePieceRuleEnforced = fivePieceRule!
+        }
+        Game.sharedInstance.currentPlayer = Game.sharedInstance.PLAYER_1
+
         delegate?.willDismiss()
         dismissViewControllerAnimated(false, completion: nil)
     }
@@ -98,6 +121,32 @@ class BoardViewController: UIViewController {
         let leagueTableViewController = storyboard?.instantiateViewControllerWithIdentifier("LeagueTableNavigationController") as! UINavigationController
         
         presentViewController(leagueTableViewController, animated: false, completion: nil)
+    }
+    
+    @IBAction func settings(sender: UIButton) {
+        let settingsNavController = storyboard?.instantiateViewControllerWithIdentifier("SettingsNavigationController") as! UINavigationController
+        let root = settingsNavController.viewControllers[0] as! SettingsViewController
+        root.delegate = self
+        root.tempNumStartPieces = numStartPieces
+        root.tempNumPiecesToWin = numPiecesToWin
+        root.tempFivePieceRule = fivePieceRule
+        presentViewController(settingsNavController, animated: false, completion: nil)
+    }
+
+    func settingsDidChange(numStartPieces: Int, numPiecesToWin: Int, fivePieceRuleEnforced: Bool) {
+        if (gameHasBegun) {
+            self.numStartPieces = numStartPieces
+            self.numPiecesToWin = numPiecesToWin
+            self.fivePieceRule = fivePieceRuleEnforced
+        } else {
+            self.numStartPieces = nil
+            self.numPiecesToWin = nil
+            self.fivePieceRule = nil
+            Game.sharedInstance.style = numStartPieces == 9 ? Game.GameStyle.HasamiShogi : Game.GameStyle.DaiHasamiShogi
+            Game.sharedInstance.numberOfCapturedPiecesToWin = numPiecesToWin
+            Game.sharedInstance.fivePieceRuleEnforced = fivePieceRuleEnforced
+            restartGame()
+        }
     }
     
 }
@@ -174,6 +223,7 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
             if (originCell.state != BoardCollectionViewCell.BOARD_CELL_STATE_EMPTY && destinationCell.state == BoardCollectionViewCell.BOARD_CELL_STATE_EMPTY) {
                 // attempt to move piece from the origin to the destination
                 if (board.isMoveLegalFromOriginCell(originCell, atIndexPath: originIndexPath!, toDestinationCell: destinationCell, atIndexPath: destinationIndexPath)) {
+                    gameHasBegun = true
                     // move successful
                     board.movePieceFromCell(originCell, toDestinationCell: destinationCell)
                     collectionView.deselectItemAtIndexPath(self.originIndexPath!, animated: false)
@@ -188,23 +238,35 @@ extension BoardViewController: UICollectionViewDataSource, UICollectionViewDeleg
                         let winner = Game.sharedInstance.checkForWinner(board)
                         if (winner != nil) {
                             if (winner == Game.sharedInstance.PLAYER_1) {
-                                displayWinnerMessage("Player 1")
+                                displayWinnerMessage(player1!)
+                                if (player1IsRegistered! && player2IsRegistered!) {
+                                    dataController.updatePlayerScoreWithName(player1!)
+                                }
                             } else {
-                                displayWinnerMessage("Player 2")
+                                displayWinnerMessage(player2!)
+                                if (player1IsRegistered! && player2IsRegistered!) {
+                                    dataController.updatePlayerScoreWithName(player2!)
+                                }
                             }
                         }
                     }
                     
-                    if (Game.sharedInstance.style == Game.GameStyle.DaiHasamiShogi && Game.sharedInstance.fivePieceRuleEnforced) {
+                    if (Game.sharedInstance.style == Game.GameStyle.DaiHasamiShogi && Game.sharedInstance.fivePieceRuleEnforced && destinationIndexPath.section > 1 && destinationIndexPath.section < 7) {
                         let friendlyCells = board.numberOfFriendlyCellsFromCell(destinationCell, atIndexPath: destinationIndexPath)
                         if (friendlyCells != nil) {
                             let winner = Game.sharedInstance.checkForWinner(friendlyCells!)
                             
                             if (winner != nil) {
                                 if (winner == Game.sharedInstance.PLAYER_1) {
-                                    displayWinnerMessage("Player 1")
+                                    displayWinnerMessage(player1!)
+                                    if (player1IsRegistered! && player2IsRegistered!) {
+                                        dataController.updatePlayerScoreWithName(player1!)
+                                    }
                                 } else {
-                                    displayWinnerMessage("Player 2")
+                                    displayWinnerMessage(player2!)
+                                    if (player1IsRegistered! && player2IsRegistered!) {
+                                        dataController.updatePlayerScoreWithName(player2!)
+                                    }
                                 }
                             }
                         }

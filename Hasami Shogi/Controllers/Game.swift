@@ -20,7 +20,7 @@ class Game: NSObject {
     let PLAYER_2 = 2
     
     var currentPlayer = 1
-    var style = GameStyle.DaiHasamiShogi
+    var style = GameStyle.HasamiShogi
     
     var fivePieceRuleEnforced = false
     

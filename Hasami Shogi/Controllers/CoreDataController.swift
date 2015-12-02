@@ -36,4 +36,30 @@ class CoreDataController: NSObject {
         player.avatar = playerAvatar
         appDelegate.saveContext()
     }
+    
+    func updatePlayerScoreWithName(name: String) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context = appDelegate.managedObjectContext
+        
+        let request = NSFetchRequest(entityName: "Player")
+        
+        let nameArray = name.componentsSeparatedByString(" ")
+        let forename = nameArray[0]
+        let surname = nameArray[1]
+        
+        let forenamePredicate = NSPredicate(format: "forename matches[c] %@", forename)
+        let surnamePredicate = NSPredicate(format: "surname matches[c] %@", surname)
+
+        let namePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [forenamePredicate, surnamePredicate])
+        request.predicate = namePredicate
+        
+        do {
+            let players = try context.executeFetchRequest(request) as! [Player]
+            let player = players[0]
+            player.score = NSNumber(integer: (player.score?.integerValue)! + 1)
+            appDelegate.saveContext()
+        } catch {
+            fatalError("Failed to fetch employees: \(error)")
+        }
+    }
 }

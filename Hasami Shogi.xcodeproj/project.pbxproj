@@ -11,6 +11,7 @@
 		A952311B1C0E2AFB00B09F20 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A952311A1C0E2AFB00B09F20 /* CoreDataController.swift */; };
 		A952311D1C0E3DF600B09F20 /* LeagueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A952311C1C0E3DF600B09F20 /* LeagueTableViewController.swift */; };
 		A952311F1C0E5FBA00B09F20 /* PlayerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A952311E1C0E5FBA00B09F20 /* PlayerDetailViewController.swift */; };
+		A956CE151C0EFA30007A6FED /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A956CE141C0EFA30007A6FED /* SettingsViewController.swift */; };
 		A95B10F71BB9C7CF00AB03A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B10F61BB9C7CF00AB03A0 /* AppDelegate.swift */; };
 		A95B10F91BB9C7CF00AB03A0 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B10F81BB9C7CF00AB03A0 /* BoardViewController.swift */; };
 		A95B10FC1BB9C7CF00AB03A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A95B10FA1BB9C7CF00AB03A0 /* Main.storyboard */; };
@@ -52,6 +53,7 @@
 		A952311A1C0E2AFB00B09F20 /* CoreDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		A952311C1C0E3DF600B09F20 /* LeagueTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeagueTableViewController.swift; sourceTree = "<group>"; };
 		A952311E1C0E5FBA00B09F20 /* PlayerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerDetailViewController.swift; sourceTree = "<group>"; };
+		A956CE141C0EFA30007A6FED /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A95B10F31BB9C7CF00AB03A0 /* Hasami Shogi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hasami Shogi.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A95B10F61BB9C7CF00AB03A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A95B10F81BB9C7CF00AB03A0 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				A952311A1C0E2AFB00B09F20 /* CoreDataController.swift */,
 				A952311C1C0E3DF600B09F20 /* LeagueTableViewController.swift */,
 				A952311E1C0E5FBA00B09F20 /* PlayerDetailViewController.swift */,
+				A956CE141C0EFA30007A6FED /* SettingsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				A9B7669B1BC3FFAF00E74CAC /* Game.swift in Sources */,
 				A95B10F71BB9C7CF00AB03A0 /* AppDelegate.swift in Sources */,
 				A973CCEB1C0CC329002868DB /* RegisterViewController.swift in Sources */,
+				A956CE151C0EFA30007A6FED /* SettingsViewController.swift in Sources */,
 				A94E1EF61C0DBED100D3D539 /* HomeViewController.swift in Sources */,
 				A9B766991BC3EABD00E74CAC /* Board.swift in Sources */,
 				A95CDBE81C0E0E07000CEFD1 /* Player+CoreDataProperties.swift in Sources */,
@@ -485,7 +489,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: george mcdonnell (T7NB85ST2L)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Hasami Shogi/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -501,7 +505,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: george mcdonnell (T7NB85ST2L)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Hasami Shogi/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

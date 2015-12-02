@@ -10,13 +10,12 @@ import UIKit
 
 class PlayerSelectionTableViewController: UITableViewController, BoardViewControllerDelgate {
 
-    let unregisteredPlayers = ["Player 1" , "Player 2"]
+    let unregisteredPlayers = ["Player1" , "Player2"]
     var playerNames = NSMutableArray()
     var playButton: UIBarButtonItem?
 
     let dataController = CoreDataController()
     var registeredPlayers: [Player] = []
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,8 +33,12 @@ class PlayerSelectionTableViewController: UITableViewController, BoardViewContro
     
     func play() {
         let boardViewController = storyboard?.instantiateViewControllerWithIdentifier("BoardViewController") as! BoardViewController
+        let player1Registered = !unregisteredPlayers.contains(playerNames[0] as! String)
+        let player2Registered = !unregisteredPlayers.contains(playerNames[1] as! String)
         boardViewController.player1 = playerNames[0] as? String
+        boardViewController.player1IsRegistered = player1Registered
         boardViewController.player2 = playerNames[1] as? String
+        boardViewController.player2IsRegistered = player2Registered
         boardViewController.delegate = self
         presentViewController(boardViewController, animated: false, completion: nil)
     }
@@ -81,27 +84,16 @@ class PlayerSelectionTableViewController: UITableViewController, BoardViewContro
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let cell = tableView.cellForRowAtIndexPath(indexPath)!
         let playerName = (cell.textLabel?.text)!
-        let forename = playerName.componentsSeparatedByString(" ")[0]
         if (playerNames.count != 2) {
-            if (indexPath.section == 1 && playerNames.containsObject(forename)) {
-                playerNames.removeObject(forename)
-                cell.accessoryType = UITableViewCellAccessoryType.None
-            } else if (indexPath.section == 0 && playerNames.containsObject(playerName)) {
+            if (playerNames.containsObject(playerName)) {
                 playerNames.removeObject(playerName)
                 cell.accessoryType = UITableViewCellAccessoryType.None
             } else {
-                if (indexPath.section == 1) {
-                    playerNames.addObject(forename)
-                } else {
-                    playerNames.addObject(playerName)
-                }
-                
+                playerNames.addObject(playerName)
                 cell.accessoryType = UITableViewCellAccessoryType.Checkmark
             }
         } else {
-            if (indexPath.section == 1 && playerNames.containsObject(forename)) {
-                playerNames.removeObject(forename)
-            } else if (indexPath.section == 0 && playerNames.containsObject(playerName)) {
+            if (playerNames.containsObject(playerName)) {
                 playerNames.removeObject(playerName)
             }
             cell.accessoryType = UITableViewCellAccessoryType.None
