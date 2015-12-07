@@ -59,7 +59,7 @@ class CoreDataController: NSObject {
             player.score = NSNumber(integer: (player.score?.integerValue)! + 1)
             appDelegate.saveContext()
         } catch {
-            fatalError("Failed to fetch employees: \(error)")
+            fatalError("Failed to fetch players: \(error)")
         }
     }
 }
